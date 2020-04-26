@@ -1,0 +1,14 @@
+*** Starting uWSGI 2.0.18 (64bit) on [Sun Apr 26 23:10:49 2020] ***
+compiled with version: 7.5.0 on 26 April 2020 14:43:21
+os: Linux-4.15.0-48-generic #51-Ubuntu SMP Wed Apr 3 08:28:49 UTC 2019
+nodename: iZ2ze2yqg7jdyym2u34lzmZ
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /data/backstageManagementSystem/mysite
+detected binary path: /usr/local/bin/uwsgi
+uWSGI running as root, you can use --uid/--gid/--chroot options
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /data/backstageManagementSytem/mysite/
+chdir(): No such file or directory [core/uwsgi.c line 2623]
