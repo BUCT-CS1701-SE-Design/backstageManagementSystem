@@ -24,7 +24,7 @@ SECRET_KEY = 'ce%gcayja8vu#tgeg%#+ceu9aocd&fb*%hp!=k-47n=3^+s)f7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['47.93.50.106']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog.apps.BlogConfig',
+    'backend.apps.BackendConfig'
 ]
 
 MIDDLEWARE = [
@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',   # 数据库引擎
+        'NAME': 'museumapplication',         # 你要存储数据的库名，事先要创建之
+        'USER': 'root1',         # 数据库用户名
+        'PASSWORD': 'jk20171701',     # 密码
+        'HOST': 'rm-bp1k0s6kbpm66bpfc4o.mysql.rds.aliyuncs.com',    # 主机
+        'PORT': '3306',         # 数据库使用的端口
     }
 }
 
