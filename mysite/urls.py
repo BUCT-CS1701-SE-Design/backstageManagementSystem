@@ -15,8 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from backend.testdb import Test,Add,Delete,Change
+
 
 urlpatterns = [
     path('backend/', include('backend.urls')),
     path('admin/', admin.site.urls),
+    path('test/',Test),
+    path('add/',Add),
+    path('delete/',Delete),
+    path('change/',Change),
+
+
 ]
