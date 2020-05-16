@@ -1,5 +1,6 @@
 <template>
-  <div>
+<div>
+<div class="signin">
     <el-form
       :rules="rules"
       :model="loginForm"
@@ -28,6 +29,10 @@
       >登陆</el-button>
     </el-form>
   </div>
+<div class="sys"> 
+</div>
+</div>
+  
 </template>
 
 <script>
