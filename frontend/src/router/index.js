@@ -54,7 +54,18 @@ export const constantRoutes = [
       meta: { title: 'Dashboard', icon: 'dashboard' }
     }]
   },
-
+  {
+    path: '/users',
+    component: Layout,
+    children: [
+      {
+        path: 'users',
+        name: 'users',
+        component: () => import('@/views/users/index'),
+        meta: { title: '用户管理', icon: 'form' }
+      }
+    ]
+  },
   {
     path: '/example',
     component: Layout,

@@ -2,6 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from backend.models import Academic,Collection,Education,Exhibition,Explanation,Museum,Museumnews,Museumrank,Usercomments,Userroles,Users
 
+def Postman(request):
+    result=2
+    result=request.method
+    return  HttpResponse(result)
 
 def Test(request):
     Museum_list = Museum.objects.all()#[:2]
