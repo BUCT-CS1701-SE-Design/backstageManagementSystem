@@ -126,11 +126,3 @@ module.exports = {
       )
   }
 }
-proxy: {
-  '/admin' : {
-    target: `http://localhost:8886/`, //后台服务地址
-    changeOrigin: true,
-    pathRewrite: {
-    }
-  }
-}

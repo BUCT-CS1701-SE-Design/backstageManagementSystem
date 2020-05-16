@@ -42,50 +42,19 @@ export const constantRoutes = [
     component: () => import('@/views/404'),
     hidden: true
   },
+
   {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
     children: [{
       path: 'dashboard',
-      name: '首页',
+      name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '首页', icon: 'dashboard' }
+      meta: { title: 'Dashboard', icon: 'dashboard' }
     }]
   },
-  {
-    path: '/users', // url路径
-    component: Layout, // 此处不用动，这个全局统一的一个布局文件
-    children: [{
-      path: 'users', // 二级路径
-      name: 'users',
-      component: () => import('@/views/users/index'), // 懒加载，此处写所添加文件的路径
-      meta: {
-        title: '用户管理', icon: 'plane' // 配置选项可配置测试名称和图标
-      }
-    }]
-  },
-  {
-    path: '/data', // url路径
-    component: Layout, // 此处不用动，这个全局统一的一个布局文件
-    meta: { title: '数据管理', icon: 'example' },
-    children: [
-      {
-        path: 'museum', // 二级路径
-        name: 'museum',
-        component: () => import('@/views/data/museum'), // 懒加载，此处写所添加文件的路径
-        meta: {
-          title: '博物馆', icon: 'tree' // 配置选项可配置测试名称和图标
-        }
-      },
-      {
-        path: 'exhibition',
-        name: 'exhibition',
-        component: () => import('@/views/data/exhibition'),
-        meta: { title: '展览', icon: 'tree' }
-      }
-    ]
-  },
+
   {
     path: '/example',
     component: Layout,
