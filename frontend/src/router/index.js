@@ -67,7 +67,6 @@ export const constantRoutes = [
     ]
   },
   {
-<<<<<<< HEAD
     path: '/datas',
     component: Layout,
     redirect: '/datas/museums',
@@ -121,9 +120,7 @@ export const constantRoutes = [
   },
   {
     path: '/example',
-=======
     path: '/reviewexplain',
->>>>>>> c57b1a10de45ee581e5dab9bf452514d5bc6eaf5
     component: Layout,
     redirect: '/reviewexplain/reviewing',
     name: 'checkexp',
