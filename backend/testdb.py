@@ -8,8 +8,8 @@ def vuetest(request):
     if request.method == "POST":
         user=request.POST.get("username")
         pwd=request.POST.get("password")
-        result=HttpResponse()
-        result.set_cookie(user,"v1")
+        #result=HttpResponse()
+        #result.set_cookie(user,"v1")
         result = {"code": 20000,"data": {"token": "admin-token"}}
         return HttpResponse(json.dumps(result), content_type="application/json")
 
