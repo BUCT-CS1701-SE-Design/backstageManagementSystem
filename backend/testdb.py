@@ -12,10 +12,10 @@ def vuetest(request):
 
 def infoo(request):
     if request.method == "GET":
-        result = {{"code": 20000, "data": {"roles": ["admin"], "introduction": "I am a super administrator",
-                                       "avatar": "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif", "name": "Super Admin"}}}
-        return JsonResponse(result)
-        # return HttpResponse(json.dumps(result))
+        result = {"code": 20000, "data": {"roles": ["admin"], "introduction": "I am a super administrator",
+                                       "avatar": "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif", "name": "张昊"}}
+        return HttpResponse(json.dumps(result), content_type="application/json")
+# return HttpResponse(json.dumps(result))
 
 
 def Postman(request):
