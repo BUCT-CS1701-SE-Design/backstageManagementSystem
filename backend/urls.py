@@ -6,9 +6,11 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('test/',api.Test),
-    path('add/',api.Add),
-    path('delete/',api.Delete),
-    path('change/',api.Change),
-    path('postman',api.Postman)
+    path('test',api.Test),
+    path('add',api.Add),
+    path('delete',api.Delete),
+    path('change',api.Change),
+    path('postman',api.Postman),
+    path('vuetest',api.vuetest),
+    path('info',api.infoo)
 ]
