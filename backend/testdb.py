@@ -6,7 +6,11 @@ import json
 
 def vuetest(request):
     if request.method == "POST":
-        result = {"code": 20000, "data": {"token": "admin-token"}}
+        user=request.POST.get("username")
+        pwd=request.POST.get("password")
+        #result=HttpResponse()
+        #result.set_cookie(user,"v1")
+        result = {"code": 20000,"data": {"token": "admin-token"}}
         return HttpResponse(json.dumps(result), content_type="application/json")
 
 
@@ -16,7 +20,9 @@ def infoo(request):
                                        "avatar": "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif", "name": "张昊"}}
         return HttpResponse(json.dumps(result), content_type="application/json")
 # return HttpResponse(json.dumps(result))
-
+def loginout(request):
+    result={"code":20000,"data":"success"}
+    return HttpResponse(json.dumps(result), content_type="application/json")
 
 def Postman(request):
     result = 2
