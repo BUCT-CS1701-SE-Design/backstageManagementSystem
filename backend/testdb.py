@@ -10,7 +10,7 @@ def vuetest(request):
         pwd=request.POST.get("password")
         result=HttpResponse()
         result.set_cookie(user,"v1")
-        result = {"data": {"token": "admin-token"}}
+        result = {"code": 20000,"data": {"token": "admin-token"}}
         return HttpResponse(json.dumps(result), content_type="application/json")
 
 
