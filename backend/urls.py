@@ -12,5 +12,6 @@ urlpatterns = [
     path('change',api.Change),
     path('postman',api.Postman),
     path('vuetest',api.vuetest),
-    path('info',api.infoo)
+    path('info',api.infoo),
+    path('loginout',api.loginout)
 ]
