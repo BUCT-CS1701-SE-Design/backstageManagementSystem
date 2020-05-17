@@ -67,6 +67,59 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/datas',
+    component: Layout,
+    redirect: '/datas/museums',
+    name: 'datas',
+    meta: {title: '数据管理', icon: 'form' },
+    children: [
+      {
+        path: 'museums',
+        name: 'museums',
+        component: ()=> import("@/views/museums/index"),
+        meta: {title: '博物馆信息'}
+      },
+      {
+        path: 'exhibitions',
+        name: 'exhibitions',
+        component: ()=> import("@/views/exhibitions/index"),
+        meta: {title: '展览信息'}
+      },
+      {
+        path: 'collections',
+        name: 'collections',
+        component: ()=> import("@/views/collections/index"),
+        meta: {title: '藏品信息'}
+      },
+      {
+        path: 'news',
+        name: 'news',
+        component: ()=> import("@/views/news/index"),
+        meta: {title: '新闻信息'}
+      },
+      {
+        path: 'explainations',
+        name: 'explainations',
+        component: ()=> import("@/views/explainations/index"),
+        meta: {title: '讲解信息'}
+      },
+      {
+        path: 'comments',
+        name: 'comments',
+        component: ()=> import("@/views/comments/index"),
+        meta: {title: '评论信息'}
+      },
+      {
+        path: 'sql_log',
+        name: 'sql_log',
+        component: ()=> import("@/views/sql_log/index"),
+        meta: {title: '数据库操作日志'}
+      }
+       
+    ]
+  },
+  {
+    path: '/example',
     path: '/reviewexplain',
     component: Layout,
     redirect: '/reviewexplain/reviewing',
