@@ -1,1 +1,13 @@
 node_modules
+backend/__pycache__/test_collection.cpython-37.pyc
+backend/__pycache__/admin.cpython-37.pyc
+backend/__pycache__/models.cpython-37.pyc
+backend/__pycache__/admin.cpython-37.pyc
+backend/__pycache__/models.cpython-37.pyc
+backend/__pycache__/test_collection.cpython-37.pyc
+backend/__pycache__/test_comment_insert.cpython-37.pyc
+backend/__pycache__/test_exhibition.cpython-37.pyc
+backend/__pycache__/test_explanation.cpython-37.pyc
+backend/__pycache__/test_museum.cpython-37.pyc
+backend/__pycache__/testdb.cpython-37.pyc
+backend/__pycache__/urls.cpython-37.pyc
