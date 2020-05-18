@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from backend.models import Academic, Collection, Education, Exhibition, Explanation, Museum, Museumnews, Museumrank, Usercomments, Userroles, Users
 import json
+from django.core import serializers
 
 def comment_test(request):
     result = []
@@ -10,11 +11,12 @@ def comment_test(request):
         data['userid'] = Users.objects.filter(userid=000).exists(),
         data['museumid'] = Museum.objects.filter(museumid=000).exists(),
         data['museumname'] = Museum.objects.filter(museumname='xxx').exists(),
-        #data['commentdate'] = Usercomments.objects.filter(commentdate=xxx).exists()
+        #data['commentdate'] = Usercomments.objects.filter(commentdate=xxx).exists(),
         data['comment'] = Usercomments.objects.filter(comment='xxx').exists(),
-
+        data['sentianalysis_enviroment'] = Usercomments.objects.filter(sentianalysis_environment=1).exists(),
+        data['sentianalysis_exhibit'] = Usercomments.objects.filter(sentianalysis_exhibit=1).exists(),
+        data['sentianalysis_service'] = Usercomments.objects.filter(sentianalysis_service=1).exists(),
     result.append(data)
-
     return HttpResponse(result)
 
 def comment_test_admin(request):
@@ -23,10 +25,18 @@ def comment_test_admin(request):
     data['userid'] = Users.objects.filter(userid=000).exists(),
     data['museumid'] = Museum.objects.filter(museumid=000).exists(),
     data['museumname'] = Museum.objects.filter(museumname='xxx').exists(),
-    #data['commentdate'] = Usercomments.objects.filter(commentdate=xxx).exists()
+    #data['commentdate'] = Usercomments.objects.filter(commentdate=xxx).exists(),
     data['comment'] = Usercomments.objects.filter(comment='xxx').exists(),
+    data['sentianalysis_enviroment'] = Usercomments.objects.filter(sentianalysis_environment=1).exists(),
+    data['sentianalysis_exhibit'] = Usercomments.objects.filter(sentianalysis_exhibit=1).exists(),
+    data['sentianalysis_service'] = Usercomments.objects.filter(sentianalysis_service=1).exists(),
     result.append(data)
     return HttpResponse(json.dumps(result))
+
+def comment_get(request):
+    Usercomments_list = Usercomments.objects.all()
+    jsondata = serializers.serialize('json', Usercomments_list)
+    return HttpResponse(jsondata)
 
 def comment_add(request):
     userid_add = 400

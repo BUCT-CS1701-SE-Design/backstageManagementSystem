@@ -21,6 +21,7 @@ urlpatterns = [
 
     path('commenttest',api1.comment_test),
     path('commenttestadmin',api1.comment_add),
+    path('commentget',api1.comment_get),
     path('commentadd',api1.comment_add),
     path('commentdelete',api1.comment_delete),
     path('commentchange',api1.comment_change),
