@@ -1,9 +1,16 @@
 import request from '@/utils/request'
-
+export function get_csrf() {
+  return request({
+    url: 'get_csrf',
+    method: 'get'
+  })
+}
 export function login(data) {
+  // const csrf_token = get_csrf()
   return request({
     url: 'loginin',
     method: 'post',
+    // headers: { 'Content-Type': 'multipart/form-data', 'X-CSRFToken': csrf_token },
     data
   })
 }
