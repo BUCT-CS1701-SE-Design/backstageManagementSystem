@@ -1,30 +1,46 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from backend.models import Academic, Collection, Education, Exhibition, Explanation, Museum, Museumnews, Museumrank, Usercomments, Userroles, Users
 import json
+from django.middleware.csrf import get_token
+from django.contrib.auth import authenticate,login,logout
+from django.core import serializers
 
+# csrf认证
+def get_csrf(request):
+    # 生成 csrf 数据，发送给前端
+    csrf_token = get_token(request)
+    return JsonResponse({'token':csrf_token,'code':200})
 
 def vuetest(request):
     if request.method == "POST":
-        user=request.POST.get("username")
-        pwd=request.POST.get("password")
-        print()
-        result = {"code": 20000,"data": {"token": "admin-token"}}
-        print(HttpResponse(json.dumps(result), content_type="application/json"))
+        data=eval(request.body.decode()).get('username')
+        username =json.loads(request.body).get('username')
+        datap=eval(request.body.decode()).get('password')
+        password =json.loads(request.body).get('password')
+        user=authenticate(username=username,password=password)
+        if user:
+            result={"data": {"token": "admin-token"}}
+            result["code"]=200
         #result=HttpResponse()
         #result.set_cookie(user,"v1")
-        
-        #return HttpResponse(json.dumps(result), content_type="application/json")
-        return HttpResponse()
+            login(request,user)
+            return HttpResponse(json.dumps(result), content_type="application/json")
+        else: 
+            return HttpResponse("false")
 
 def infoo(request):
     if request.method == "GET":
-        result = {"code": 20000, "data": {"roles": ["admin"], "introduction": "I am a super administrator",
-                                       "avatar": "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif", "name": "张昊"}}
+        result = { "data": {"roles": ["admin"], "introduction": "I am a super administrator",
+                                        "name": "admin"}}
+        result["data"]["avatar"]="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif"
+        result["code"] = 200
+        #print(result["data"]["avatar"])
         return HttpResponse(json.dumps(result), content_type="application/json")
 # return HttpResponse(json.dumps(result))
 def loginout(request):
-    result={"code":20000,"data":"success"}
+    logout(request)
+    result={"code":200,"data":"success"}
     return HttpResponse(json.dumps(result), content_type="application/json")
 
 def Postman(request):
@@ -34,19 +50,31 @@ def Postman(request):
 
 
 def Test(request):
-    Museum_list = Museum.objects.all()  # [:2]
-    result = []
+    Museum_list = Museum.objects.all()[:1]  # [:2]
+    #result["code"] = 200
+    result={}
     i = 1
-    for var in Museum_list:
-        data = {}
-        data['museumid'] = var.museumid,
-        data['museumname'] = var.museumname,
+    jsondata=serializers.serialize('json', Museum_list)
+    jsondatautf8=json.loads(jsondata, encoding='utf-8')
+    # data = {
+    #     "code"=200,
+    #     "data"=jsondata
+    #     }
+    result = {
+		"code":200,
+		"data":{
+            "total":len(Museum_list),
+            "items":jsondatautf8}
+		}
+    # for var in Museum_list:
+    #     data['museumid'] = var.museumid,
+    #     data['museumname'] = var.museumname,
         # data['introduction']=var.introduction,
         # data['opentime']=var.opentime,
 
-        result.append(data)
-        i += 1
-    return HttpResponse(result)
+        # result.append(data)
+        # i += 1
+    return JsonResponse(result)
 
 
 def Add(request):

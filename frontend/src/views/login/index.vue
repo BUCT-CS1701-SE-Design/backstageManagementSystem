@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <h3 class="title">博物馆应用平台后台管理系统</h3>
       </div>
 
       <el-form-item prop="username">
@@ -54,6 +54,7 @@
 
 <script>
 import { validUsername } from '@/utils/validate'
+import get_csrf from '@/api/user'
 
 export default {
   name: 'Login',
@@ -94,8 +95,17 @@ export default {
       immediate: true
     }
   },
+  created() {
+    this.get_token() // 获取csrf_token
+    this.get_user() // 获取用户列表
+  },
   methods: {
-
+    get_token() {
+      get_csrf().then(res => {
+        // console.log(res.token)
+        window.csrf_token = res.token // 将得到的token 赋值给全局变量
+      })
+    },
     showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''

@@ -111,8 +111,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',   # 数据库引擎
         'NAME': 'museumapplication',         # 你要存储数据的库名，事先要创建之
-        'USER': 'root1',         # 数据库用户名
-        'PASSWORD': 'jk20171701',     # 密码
+        'USER': 'django',         # 数据库用户名
+        'PASSWORD': 'django1234',     # 密码
         'HOST': 'rm-bp1k0s6kbpm66bpfc4o.mysql.rds.aliyuncs.com',    # 主机
         'PORT': '3306',         # 数据库使用的端口
     }

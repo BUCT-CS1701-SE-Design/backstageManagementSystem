@@ -1,9 +1,9 @@
 <template>
-  
+
   <div class="app-container">
-      <div> 
+    <div>
       <p>博物馆信息 </p>
-      </div>
+    </div>
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -14,22 +14,22 @@
     >
       <el-table-column align="center" label="ID" width="95">
         <template slot-scope="scope">
-          {{ scope.$index }}
+          {{ scope.row.pk }}
         </template>
       </el-table-column>
-      <el-table-column label="Title">
+      <el-table-column label="博物馆名">
         <template slot-scope="scope">
-          {{ scope.row.title }}
+          {{ scope.row.fields.museumname }}
         </template>
       </el-table-column>
-      <el-table-column label="Author" width="110" align="center">
+      <el-table-column label="地址" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.author }}</span>
+          <span>{{ scope.row.fields.location }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="Pageviews" width="110" align="center">
+      <el-table-column label="官网链接" align="center">
         <template slot-scope="scope">
-          {{ scope.row.pageviews }}
+          <a href=""> {{ scope.row.fields.link }} </a>
         </template>
       </el-table-column>
       <el-table-column class-name="status-col" label="Status" width="110" align="center">
@@ -54,9 +54,8 @@ export default {
   filters: {
     statusFilter(status) {
       const statusMap = {
-        published: 'success',
-        draft: 'gray',
-        deleted: 'danger'
+        active: 1,
+        deleted: 0
       }
       return statusMap[status]
     }
@@ -64,6 +63,7 @@ export default {
   data() {
     return {
       list: null,
+      fields: null,
       listLoading: true
     }
   },
@@ -75,6 +75,8 @@ export default {
       this.listLoading = true
       getList().then(response => {
         this.list = response.data.items
+        this.fields = this.list.fields
+        console.log(response.data.items)
         this.listLoading = false
       })
     }
