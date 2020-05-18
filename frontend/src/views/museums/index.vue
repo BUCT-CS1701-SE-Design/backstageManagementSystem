@@ -34,7 +34,7 @@
       </el-table-column>
       <el-table-column class-name="status-col" label="Status" width="110" align="center">
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
+          <el-tag :type="scope.row.fields.status | statusFilter">{{ scope.row.fields.status }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column align="center" prop="created_at" label="Display_time" width="200">
@@ -55,7 +55,8 @@ export default {
     statusFilter(status) {
       const statusMap = {
         active: 1,
-        deleted: 0
+        deleted: 0,
+        1: 'deleted'
       }
       return statusMap[status]
     }
@@ -63,7 +64,7 @@ export default {
   data() {
     return {
       list: null,
-      fields: null,
+      fieldds: null,
       listLoading: true
     }
   },
@@ -75,8 +76,7 @@ export default {
       this.listLoading = true
       getList().then(response => {
         this.list = response.data.items
-        this.fields = this.list.fields
-        console.log(response.data.items)
+        console.log(response.data.items.fields)
         this.listLoading = false
       })
     }
