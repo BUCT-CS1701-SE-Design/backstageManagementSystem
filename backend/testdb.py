@@ -31,9 +31,8 @@ def vuetest(request):
 
 def infoo(request):
     if request.method == "GET":
-        result = { "data": {"roles": ["admin"], "introduction": "I am a super administrator",
+        result = { "data": {"roles": ["admin"], "introduction": "I am a super administrator","avatar": "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif",
                                         "name": "admin"}}
-        result["data"]["avatar"]="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif"
         result["code"] = 200
         #print(result["data"]["avatar"])
         return HttpResponse(json.dumps(result), content_type="application/json")
@@ -50,30 +49,16 @@ def Postman(request):
 
 
 def Test(request):
-    Museum_list = Museum.objects.all()[:1]  # [:2]
-    #result["code"] = 200
+    Museum_list = Museum.objects.all()  # [:2]
     result={}
-    i = 1
     jsondata=serializers.serialize('json', Museum_list)
     jsondatautf8=json.loads(jsondata, encoding='utf-8')
-    # data = {
-    #     "code"=200,
-    #     "data"=jsondata
-    #     }
     result = {
 		"code":200,
 		"data":{
             "total":len(Museum_list),
             "items":jsondatautf8}
 		}
-    # for var in Museum_list:
-    #     data['museumid'] = var.museumid,
-    #     data['museumname'] = var.museumname,
-        # data['introduction']=var.introduction,
-        # data['opentime']=var.opentime,
-
-        # result.append(data)
-        # i += 1
     return JsonResponse(result)
 
 

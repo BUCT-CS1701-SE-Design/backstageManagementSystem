@@ -17,7 +17,7 @@
           {{ scope.row.pk }}
         </template>
       </el-table-column>
-      <el-table-column label="博物馆名">
+      <el-table-column label="博物馆名" width="100">
         <template slot-scope="scope">
           {{ scope.row.fields.museumname }}
         </template>
@@ -37,10 +37,10 @@
           <el-tag :type="scope.row.fields.status | statusFilter">{{ scope.row.fields.status }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="Display_time" width="200">
+      <el-table-column align="center" prop="created_at" label="开放时间" width="400">
         <template slot-scope="scope">
           <i class="el-icon-time" />
-          <span>{{ scope.row.display_time }}</span>
+          <span>{{ scope.row.fields.opentime }}</span>
         </template>
       </el-table-column>
     </el-table>
@@ -54,9 +54,8 @@ export default {
   filters: {
     statusFilter(status) {
       const statusMap = {
-        active: 1,
-        deleted: 0,
-        1: 'deleted'
+        1: 'success',
+        0: 'gray'
       }
       return statusMap[status]
     }
