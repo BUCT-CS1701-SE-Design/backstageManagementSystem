@@ -55,7 +55,7 @@ export default {
     statusFilter(status) {
       const statusMap = {
         1: 'success',
-        0: 'gray'
+        0: 'deleted'
       }
       return statusMap[status]
     }
