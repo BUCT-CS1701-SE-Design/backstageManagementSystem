@@ -1,3 +1,4 @@
+
 from django.urls import path
 #from backend.testdb import Postman,Test,Add,Delete,Change
 import backend.testdb as api
@@ -15,10 +16,13 @@ urlpatterns = [
     path('delete',api.Delete),
     path('change',api.Change),
     path('postman',api.Postman),
-    path('get_csrf',api.get_csrf),
     path('loginin',api.vuetest),
     path('info',api.infoo),
     path('loginout',api.loginout),
+
+    path('exhibition',api.TestEx),
+    path('news',api.News),
+    path('citymuseum',api.Citymuseum),
 
     path('commenttest',api1.comment_test),
     path('commenttestadmin',api1.comment_add),
@@ -50,3 +54,4 @@ urlpatterns = [
 
 
 ]
+
