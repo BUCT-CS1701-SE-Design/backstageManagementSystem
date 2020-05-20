@@ -58,7 +58,7 @@ def Postman(request):
 
 
 def Test(request):
-    Museum_list = Museum.objects.all()[:1]  # [:2]
+    Museum_list = Museum.objects.all()  # [:2]
     # result["code"] = 200
     result = {}
     i = 1
