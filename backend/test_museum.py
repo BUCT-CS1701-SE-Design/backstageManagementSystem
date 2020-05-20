@@ -25,8 +25,8 @@ def Postman(request):
     return HttpResponse(result)
 
 
-def museum_test(request):
-    testdata = 12
+def museum_test(request,id):
+    testdata = int(id)
     Museum_list = Museum.objects.filter(museumid = testdata)  # [:5]
     '''
     result = []

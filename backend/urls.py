@@ -7,6 +7,7 @@ import backend.test_museum as api2
 import backend.test_exhibition as api3
 import backend.test_collection as api4
 import backend.test_explanation as api5
+
 from . import views
 
 urlpatterns = [
@@ -31,12 +32,12 @@ urlpatterns = [
     path('commentdelete',api1.comment_delete),
     path('commentchange',api1.comment_change),
 
-    path('museumtest',api2.museum_test),
+    path('museumtest/<int:id>/',api2.museum_test),
     path('museumadd',api2.museum_add),
     path('museumdelete',api2.museum_delete),
     path('museumchange',api2.museum_change),
 
-    path('exhibitiontest',api3.exhibithion_test),
+    path('exhibitiontest/<int:id>/',api3.exhibithion_test),
     path('exhibitionadd',api3.exhibition_add),
     path('exhibitiondelete',api3.exhibition_delete),
     path('exhibitionchange',api3.exhibition_change),
