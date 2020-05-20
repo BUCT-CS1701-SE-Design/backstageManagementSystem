@@ -1,46 +1,55 @@
+
 from django.shortcuts import render
-from django.http import HttpResponse,JsonResponse
-from backend.models import Academic, Collection, Education, Exhibition, Explanation, Museum, Museumnews, Museumrank, Usercomments, Userroles, Users
+from django.http import HttpResponse, JsonResponse
+from backend.models import Academic, Collection, Education, Exhibition, Explanation, Museum, Museumnews, Museumrank, \
+    Usercomments, Userroles, Users
 import json
 from django.middleware.csrf import get_token
-from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import authenticate, login, logout
 from django.core import serializers
+
 
 # csrf认证
 def get_csrf(request):
     # 生成 csrf 数据，发送给前端
     csrf_token = get_token(request)
-    return JsonResponse({'token':csrf_token,'code':200})
+    return JsonResponse({'token': csrf_token, 'code': 200})
+
 
 def vuetest(request):
     if request.method == "POST":
-        data=eval(request.body.decode()).get('username')
-        username =json.loads(request.body).get('username')
-        datap=eval(request.body.decode()).get('password')
-        password =json.loads(request.body).get('password')
-        user=authenticate(username=username,password=password)
+        data = eval(request.body.decode()).get('username')
+        username = json.loads(request.body).get('username')
+        datap = eval(request.body.decode()).get('password')
+        password = json.loads(request.body).get('password')
+        user = authenticate(username=username, password=password)
         if user:
-            result={"data": {"token": "admin-token"}}
-            result["code"]=200
-        #result=HttpResponse()
-        #result.set_cookie(user,"v1")
-            login(request,user)
+            result = {"data": {"token": "admin-token"}}
+            result["code"] = 200
+            # result=HttpResponse()
+            # result.set_cookie(user,"v1")
+            login(request, user)
             return HttpResponse(json.dumps(result), content_type="application/json")
-        else: 
+        else:
             return HttpResponse("false")
+
 
 def infoo(request):
     if request.method == "GET":
-        result = { "data": {"roles": ["admin"], "introduction": "I am a super administrator","avatar": "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif",
-                                        "name": "admin"}}
+        result = {"data": {"roles": ["admin"], "introduction": "I am a super administrator",
+                           "name": "admin"}}
+        result["data"]["avatar"] = "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif"
         result["code"] = 200
-        #print(result["data"]["avatar"])
+        # print(result["data"]["avatar"])
         return HttpResponse(json.dumps(result), content_type="application/json")
+
+
 # return HttpResponse(json.dumps(result))
 def loginout(request):
     logout(request)
-    result={"code":200,"data":"success"}
+    result = {"code": 200, "data": "success"}
     return HttpResponse(json.dumps(result), content_type="application/json")
+
 
 def Postman(request):
     result = 2
@@ -49,17 +58,100 @@ def Postman(request):
 
 
 def Test(request):
-    Museum_list = Museum.objects.all()  # [:2]
-    result={}
-    jsondata=serializers.serialize('json', Museum_list)
-    jsondatautf8=json.loads(jsondata, encoding='utf-8')
+    Museum_list = Museum.objects.all()[:1]  # [:2]
+    # result["code"] = 200
+    result = {}
+    i = 1
+    jsondata = serializers.serialize('json', Museum_list)
+    jsondatautf8 = json.loads(jsondata, encoding='utf-8')
+    # data = {
+    #     "code"=200,
+    #     "data"=jsondata
+    #     }
     result = {
-		"code":200,
-		"data":{
-            "total":len(Museum_list),
-            "items":jsondatautf8}
-		}
+        "code": 200,
+        "data": {
+            "total": len(Museum_list),
+            "items": jsondatautf8}
+    }
+    # for var in Museum_list:
+    #     data['museumid'] = var.museumid,
+    #     data['museumname'] = var.museumname,
+    # data['introduction']=var.introduction,
+    # data['opentime']=var.opentime,
+
+    # result.append(data)
+    # i += 1
     return JsonResponse(result)
+
+
+def TestEx(request):
+    Exhibition_list = Exhibition.objects.all()  # [:2]
+    '''
+    result = []
+    i = 1
+    for var in Exhibition_list:
+        data = {}
+        data['museumid'] = var.museumid
+        data['exhibtionid'] = var.exhibitionid
+        data['museumname'] = var.museumname
+
+        result.append(data)
+        i += 1
+    return HttpResponse(result)
+'''
+    jsondata = serializers.serialize('json',Exhibition_list)
+    jsondatautf8 = json.loads(jsondata, encoding='utf-8')
+
+    result = {
+        "code": 200,
+        "data": {
+            "total": len(Exhibition_list),
+            "items": jsondatautf8}
+    }
+    return  JsonResponse(result)
+
+def News(request):
+    News_list = Museumnews.objects.all()
+    '''
+    result = []
+    i = 1
+    for var in News_list:
+        data = {}
+        data['Newsid'] = var.newsid
+        data['museumid'] = var.museumid
+        data['newstitle'] = var.newstitle
+        data['newstime'] = var.newstime
+        data['museumname'] = var.museumname
+
+        result.append(data)
+        i += 1
+    return HttpResponse(result)
+'''
+    jsondata = serializers.serialize('json',News_list)
+    jsondatautf8 = json.loads(jsondata, encoding='utf-8')
+    result = {
+        "code": 200,
+        "data": {
+            "total": len(News_list),
+            "items": jsondatautf8}
+    }
+    return  JsonResponse(result)
+
+def Citymuseum(request):
+    city = '北京'
+    Museum_list = Museum.objects.filter(location__icontains=city)
+    result = []
+    i = 1
+    for var in Museum_list:
+        data = {}
+        data['museumname'] = var.museumname
+        data['museumid'] = var.museumid
+        data['location'] = var.location
+
+        result.append(data)
+        i += 1
+    return HttpResponse(result)
 
 
 def Add(request):
@@ -88,3 +180,6 @@ def Change(request):
         museumid=museumid_after)
     result = f"change museumid from {museumid_before} to {museumid_after}"
     return HttpResponse(result)
+
+
+
