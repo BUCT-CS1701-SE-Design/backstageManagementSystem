@@ -26,8 +26,8 @@ def Postman(request):
     return HttpResponse(result)
 
 
-def museum_test(request):
-    testdata = 12
+def museum_test(request,id):
+    testdata = int(id)
     Museum_list = Museum.objects.filter(museumid = testdata)
     result = {}
     jsondata = serializers.serialize('json', Museum_list)
@@ -38,6 +38,7 @@ def museum_test(request):
             "total": len(Museum_list),
             "items": jsondatautf8}
     }
+
     '''
     result = []
     i = 1

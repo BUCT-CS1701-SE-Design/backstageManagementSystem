@@ -25,7 +25,7 @@ def Postman(request):
     result = request.method
     return HttpResponse(result)
 
-def exhibithion_test(request):
+def exhibithion_test(request,id):
     testdata = 12
     Exhibition_list = Exhibition.objects.filter(museumid = testdata)
     result = {}
