@@ -6,26 +6,6 @@ from django.core import serializers
 from django.middleware.csrf import get_token
 from django.contrib.auth import authenticate, login, logout
 
-def vuetest(request):
-    if request.method == "POST":
-        result = {"code": 20000, "data": {"token": "admin-token"}}
-        return HttpResponse(json.dumps(result), content_type="application/json")
-
-
-def infoo(request):
-    if request.method == "GET":
-        result = {"code": 20000, "data": {"roles": ["admin"], "introduction": "I am a super administrator",
-                                       "avatar": "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif", "name": "张昊"}}
-        return HttpResponse(json.dumps(result), content_type="application/json")
-# return HttpResponse(json.dumps(result))
-
-
-def Postman(request):
-    result = 2
-    result = request.method
-    return HttpResponse(result)
-
-
 def museum_test(request,id):
     testdata = int(id)
     Museum_list = Museum.objects.filter(museumid = testdata)
@@ -39,24 +19,6 @@ def museum_test(request,id):
             "items": jsondatautf8}
     }
 
-    '''
-    result = []
-    i = 1
-    for var in Museum_list:
-        data = {}
-        data['museumid'] = var.museumid,
-        data['museumname'] = var.museumname,
-        data['introduction']=var.introduction,
-        data['opentime']=var.opentime,
-        data['location'] = var.location,
-        data['telephone'] = var.telephone,
-        data['link'] = var.link,
-
-        result.append(data)
-        i += 1
-    data['total'] = len(Museum_list),
-    data['code'] = 200,
-    '''
     return JsonResponse(result)
 
 def museum_add(request):

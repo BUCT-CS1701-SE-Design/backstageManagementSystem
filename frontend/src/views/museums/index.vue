@@ -36,7 +36,7 @@
 
           <el-table-column label="官网链接" align="center" width="200">
             <template slot-scope="scope">
-              <a href=""> {{ scope.row.fields.link }} </a>
+              <a href="(scope.row.fields.link)"> {{ scope.row.fields.link }} </a>
             </template>
           </el-table-column>
 
@@ -55,7 +55,7 @@
 
           <el-table-column fixed="right" label="操作" align="center">
             <template slot-scope="scope">
-              <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
+              <el-button size="small" icon="el-icon-edit" @click="handleEdit(scope.row)">编辑</el-button>
               <el-button size="small" @click="handleDeleteList(scope.row)">删除</el-button>
             </template>
           </el-table-column>
