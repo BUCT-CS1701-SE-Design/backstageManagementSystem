@@ -9,7 +9,7 @@ export function getList(params) {
 }
 export function getExhibitionList(params) {
   return request({
-    url: 'test',
+    url: '/exhibitionAll',
     method: 'get',
     params
   })
@@ -19,7 +19,7 @@ export function getExhibitionList(params) {
     method: 'get',
     params
   })
-} export function getdddList(params) {
+} export function getCollectionList(params) {
   return request({
     url: 'test',
     method: 'get',

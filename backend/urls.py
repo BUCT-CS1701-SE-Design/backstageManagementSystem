@@ -2,9 +2,9 @@
 from django.urls import path
 #from backend.testdb import Postman,Test,Add,Delete,Change
 import backend.testdb as api
-import backend.test_comment_insert as api1
+import backend.test_comment_insert as comment
 import backend.test_museum as api2
-import backend.test_exhibition as api3
+import backend.test_exhibition as exhibition
 import backend.test_collection as api4
 import backend.test_explanation as api5
 
@@ -25,22 +25,23 @@ urlpatterns = [
     path('news',api.News),
     path('citymuseum',api.Citymuseum),
 
-    path('commenttest',api1.comment_test),
-    path('commenttestadmin',api1.comment_add),
-    path('commentget',api1.comment_get),
-    path('commentadd',api1.comment_add),
-    path('commentdelete',api1.comment_delete),
-    path('commentchange',api1.comment_change),
+    path('commenttest',comment.comment_test),
+    path('commenttestadmin',comment.comment_add),
+    path('commentget',comment.comment_get),
+    path('commentadd',comment.comment_add),
+    path('commentdelete',comment.comment_delete),
+    path('commentchange',comment.comment_change),
 
     path('museumtest/<int:id>/',api2.museum_test),
     path('museumadd',api2.museum_add),
     path('museumdelete',api2.museum_delete),
     path('museumchange',api2.museum_change),
 
-    path('exhibitiontest/<int:id>/',api3.exhibithion_test),
-    path('exhibitionadd',api3.exhibition_add),
-    path('exhibitiondelete',api3.exhibition_delete),
-    path('exhibitionchange',api3.exhibition_change),
+    path('exhibitiontest/<int:id>/',exhibition.exhibithion_test),
+    path('exhibitionadd',exhibition.exhibition_add),
+    path('exhibitionAll',exhibition.Exhibition_All),
+    path('exhibitiondelete',exhibition.exhibition_delete),
+    path('exhibitionchange',exhibition.exhibition_change),
 
     path('collectiontest',api4.collection_test),
     path('collectionadd',api4.collection_add),

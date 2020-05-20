@@ -6,25 +6,6 @@ from django.core import serializers
 from django.middleware.csrf import get_token
 from django.contrib.auth import authenticate, login, logout
 
-def vuetest(request):
-    if request.method == "POST":
-        result = {"code": 20000, "data": {"token": "admin-token"}}
-        return HttpResponse(json.dumps(result), content_type="application/json")
-
-
-def infoo(request):
-    if request.method == "GET":
-        result = {"code": 20000, "data": {"roles": ["admin"], "introduction": "I am a super administrator",
-                                       "avatar": "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif", "name": "张昊"}}
-        return HttpResponse(json.dumps(result), content_type="application/json")
-# return HttpResponse(json.dumps(result))
-
-
-def Postman(request):
-    result = 2
-    result = request.method
-    return HttpResponse(result)
-
 def exhibithion_test(request,id):
     testdata = 12
     Exhibition_list = Exhibition.objects.filter(museumid = testdata)
@@ -37,23 +18,21 @@ def exhibithion_test(request,id):
             "total": len(Exhibition_list),
             "items": jsondatautf8}
     }
-    '''
-    result = []
-    i = 1
-    for var in Exhibition_list:
-        data = {}
-        data['museumid'] = var.museumid,
-        data['exhibitionTheme'] = var.exhibitiontheme,
-        data['exhibitionID'] = var.exhibitionid,
-        data['exhibition_picture'] = var.exhibition_picture,
-        result.append(data)
-        i += 1
-    data['total'] = len(Exhibition_list),
-    data['code'] = 200,
-    result.append(data)
-    return HttpResponse(result)
-'''
     return JsonResponse(result)
+
+def Exhibition_All(request):
+    Exhibition_list = Exhibition.objects.all()
+    result = {}
+    jsondata = serializers.serialize('json',Exhibition_list)
+    jsondatautf8 = json.loads(jsondata, encoding='utf-8')
+    result = {
+        "code": 200,
+        "data": {
+            "total": len(Exhibition_list),
+            "items": jsondatautf8}
+    }
+    return JsonResponse(result)
+
 
 def exhibition_add(request):
     museumid_add = 200
