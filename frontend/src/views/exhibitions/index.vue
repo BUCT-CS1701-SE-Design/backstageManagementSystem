@@ -19,18 +19,18 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="博物馆名" width="300" align="center">
+          <el-table-column label=" 展览主题 " width="300" align="center">
             <template slot-scope="scope">
 
-              <el-button size="middle" @click="handleSelect(scope.row)">{{ scope.row.fields.museumname }}</el-button>
+              <el-button size="middle" @click="handleSelect(scope.row)">{{ scope.row.fields.exhibitiontheme }}</el-button>
 
             </template>
 
           </el-table-column>
 
-          <el-table-column label="地址" align="center">
+          <el-table-column label="展览介绍" align="center">
             <template slot-scope="scope">
-              <span>{{ scope.row.fields.location }}</span>
+              <span>{{ scope.row.fields.exhibitionintroduction }}</span>
             </template>
           </el-table-column>
 
