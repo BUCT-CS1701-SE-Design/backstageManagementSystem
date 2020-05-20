@@ -13,15 +13,24 @@ export function getExhibitionList(params) {
     method: 'get',
     params
   })
-} export function getNewsList(params) {
+}
+export function getNewsList(params) {
   return request({
     url: 'test',
     method: 'get',
     params
   })
-} export function getCollectionList(params) {
+}
+export function getCollectionList(params) {
   return request({
-    url: 'test',
+    url: 'collection_All',
+    method: 'get',
+    params
+  })
+}
+export function getCommentList(params) {
+  return request({
+    url: 'comment_All',
     method: 'get',
     params
   })

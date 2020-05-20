@@ -6,26 +6,6 @@ from django.core import serializers
 from django.middleware.csrf import get_token
 from django.contrib.auth import authenticate, login, logout
 
-def vuetest(request):
-    if request.method == "POST":
-        result = {"code": 20000, "data": {"token": "admin-token"}}
-        return HttpResponse(json.dumps(result), content_type="application/json")
-
-
-def infoo(request):
-    if request.method == "GET":
-        result = {"code": 20000, "data": {"roles": ["admin"], "introduction": "I am a super administrator",
-                                       "avatar": "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif", "name": "张昊"}}
-        return HttpResponse(json.dumps(result), content_type="application/json")
-# return HttpResponse(json.dumps(result))
-
-
-def Postman(request):
-    result = 2
-    result = request.method
-    return HttpResponse(result)
-
-
 
 def collection_test(request):
     testdata = 12
@@ -39,25 +19,19 @@ def collection_test(request):
             "total": len(Collection_list),
             "items": jsondatautf8}
     }
-    '''
-    result = []
-    i = 1
-    for var in Collection_list:
-        data = {}
-        data['museumid'] = var.museumid,
-        data['collectionID'] = var.collectionid,
-        data['collectionName'] = var.collectionname,
-        data['collectionIntroduntion'] = var.collectionintroduction,
-        data['collectionimage'] = var.collectionimage,
-        result.append(data)
-        i += 1
-    data['total'] = len(Collection_list),
-    data['code'] = 200,
-    result.append(data)
-    return HttpResponse(result)
-'''
     return JsonResponse(result)
-
+def collection_All(request):
+    Collection_list = Collection.objects.all()
+    result = {}
+    jsondata = serializers.serialize('json', Collection_list)
+    jsondatautf8 = json.loads(jsondata, encoding='utf-8')
+    result = {
+        "code": 200,
+        "data": {
+            "total": len(Collection_list),
+            "items": jsondatautf8}
+    }
+    return JsonResponse(result)
 
 def collection_add(request):
     museumid_add = 200

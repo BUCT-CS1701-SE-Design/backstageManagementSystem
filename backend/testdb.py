@@ -87,19 +87,6 @@ def Test(request):
 
 def TestEx(request):
     Exhibition_list = Exhibition.objects.all()  # [:2]
-    '''
-    result = []
-    i = 1
-    for var in Exhibition_list:
-        data = {}
-        data['museumid'] = var.museumid
-        data['exhibtionid'] = var.exhibitionid
-        data['museumname'] = var.museumname
-
-        result.append(data)
-        i += 1
-    return HttpResponse(result)
-'''
     jsondata = serializers.serialize('json',Exhibition_list)
     jsondatautf8 = json.loads(jsondata, encoding='utf-8')
 
@@ -112,22 +99,7 @@ def TestEx(request):
     return  JsonResponse(result)
 
 def News(request):
-    News_list = Museumnews.objects.all()
-    '''
-    result = []
-    i = 1
-    for var in News_list:
-        data = {}
-        data['Newsid'] = var.newsid
-        data['museumid'] = var.museumid
-        data['newstitle'] = var.newstitle
-        data['newstime'] = var.newstime
-        data['museumname'] = var.museumname
-
-        result.append(data)
-        i += 1
-    return HttpResponse(result)
-'''
+    News_list = Museumnews.objects.all()[:100]
     jsondata = serializers.serialize('json',News_list)
     jsondatautf8 = json.loads(jsondata, encoding='utf-8')
     result = {

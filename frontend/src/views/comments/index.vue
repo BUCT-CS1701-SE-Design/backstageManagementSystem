@@ -1,9 +1,9 @@
 <template>
-  
+
   <div class="app-container">
-      <div> 
+    <div>
       <p>评论信息 </p>
-      </div>
+    </div>
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { getList } from '@/api/table'
+import { getCommentList } from '@/api/table'
 
 export default {
   filters: {
@@ -73,7 +73,7 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      getList().then(response => {
+      getCommentList().then(response => {
         this.list = response.data.items
         this.listLoading = false
       })

@@ -35,6 +35,19 @@ def comment_test_admin(request):
     result.append(data)
     return HttpResponse(json.dumps(result))
 
+def comment_All(request):
+    Comment_list = Usercomments.objects.all()
+    result = {}
+    jsondata = serializers.serialize('json', Comment_list)
+    jsondatautf8 = json.loads(jsondata, encoding='utf-8')
+    result = {
+        "code": 200,
+        "data": {
+            "total": len(Comment_list),
+            "items": jsondatautf8}
+    }
+    return JsonResponse(result)
+
 def comment_get(request):
     testdata=12
     Usercomments_list = Usercomments.objects.filter(museumid = testdata)

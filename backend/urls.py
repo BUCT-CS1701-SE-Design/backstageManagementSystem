@@ -27,6 +27,7 @@ urlpatterns = [
 
     path('commenttest',comment.comment_test),
     path('commenttestadmin',comment.comment_add),
+    path('comment_All',comment.comment_All),
     path('commentget',comment.comment_get),
     path('commentadd',comment.comment_add),
     path('commentdelete',comment.comment_delete),
@@ -40,10 +41,12 @@ urlpatterns = [
     path('exhibitiontest/<int:id>/',exhibition.exhibithion_test),
     path('exhibitionadd',exhibition.exhibition_add),
     path('exhibitionAll',exhibition.Exhibition_All),
+    path('exhibajax',exhibition.Exhibition_pagin),
     path('exhibitiondelete',exhibition.exhibition_delete),
     path('exhibitionchange',exhibition.exhibition_change),
 
     path('collectiontest',api4.collection_test),
+    path('collection_All',api4.collection_All),
     path('collectionadd',api4.collection_add),
     path('collectiondelete',api4.collection_delete),
     path('collectionchange',api4.collection_change),

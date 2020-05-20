@@ -414,6 +414,27 @@ export default {
   },
   methods: {
 
+    // getResult: function(val) {
+    //   var _this = this
+    //   this.listLoading = true
+    //   const param = Object.assign(
+    //     {},
+    //     {
+    //       currentPage: val,
+    //       pageSize: 10
+    //     }
+    //   )
+    //   this.$ajax({
+    //     method: 'post',
+    //     url: '/exhibajax',
+    //     data: param
+    //   }).then(function(resultData) {
+    //     _this.tableData = resultData.data.data
+    //     _this.count = resultData.data.count
+    //     _this.listLoading = false
+    //   })
+    // },
+
     fetchData() {
       this.listLoading = true
       getList().then(response => {
@@ -472,32 +493,6 @@ export default {
     },
     // 编辑
     editSubmit: function() {
-      if (this.checked == true) {
-        this.editForm.isLocked = '1'
-      }
-      if (this.checked == false) {
-        this.editForm.isLocked = '0'
-      }
-      // 主机构必填提示
-      if (this.editForm.orgid == '') {
-        this.$message({
-          message: '请选择主机构',
-          type: 'error'
-        })
-        return
-      }
-      // 岗位必填提示
-      if (this.editForm.positionid == '') {
-        this.$message({
-          message: '请选择岗位',
-          type: 'error'
-        })
-        return
-      }
-      // 如果性别未选择给默认值
-      if (this.editForm.sex == '') {
-        this.editForm.sex = '-1'
-      }
       this.$refs.editForm.validate(valid => {
         if (valid) {
           this.$confirm('确认提交吗？', '提示', {}).then(() => {

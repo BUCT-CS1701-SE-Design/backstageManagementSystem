@@ -7,25 +7,6 @@ from django.middleware.csrf import get_token
 from django.contrib.auth import authenticate, login, logout
 
 
-def vuetest(request):
-    if request.method == "POST":
-        result = {"code": 20000, "data": {"token": "admin-token"}}
-        return HttpResponse(json.dumps(result), content_type="application/json")
-
-
-def infoo(request):
-    if request.method == "GET":
-        result = {"code": 20000, "data": {"roles": ["admin"], "introduction": "I am a super administrator",
-                                       "avatar": "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif", "name": "张昊"}}
-        return HttpResponse(json.dumps(result), content_type="application/json")
-# return HttpResponse(json.dumps(result))
-
-
-def Postman(request):
-    result = 2
-    result = request.method
-    return HttpResponse(result)
-
 def explanation_test(request):
     test_explanationid = 12
     Explanation_list = Explanation.objects.filter(explanationid = test_explanationid)
@@ -38,26 +19,6 @@ def explanation_test(request):
             "total": len(Explanation_list),
             "items": jsondatautf8}
     }
-    '''
-    result = []
-    i = 1
-    for var in Explanation_list:
-        data = {}
-        #type
-        data['explanationid'] = var.explanationid,
-        data['explanationname'] = var.explanationname,
-        data['explainerid'] = var.explainerid,
-        data['explanationtime'] = var.explanationtime,
-        #state
-        data['total'] = len(Explanation_list),
-        data['code'] = 200,
-        result.append(data)
-        i += 1
-    data['total'] = len(Explanation_list),
-    data['code'] = 200,
-    result.append(data)
-    return HttpResponse(json.dumps(result))
-'''
     return JsonResponse(result)
 
 def explanation_add(request):

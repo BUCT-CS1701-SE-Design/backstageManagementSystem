@@ -12,44 +12,52 @@
       <!--页面表格显示信息--->
       <template>
         <el-table v-loading="listLoading" :data="list" element-loading-text="Loading" border fit highlight-current-row>
-
-          <el-table-column align="center" label="ID" width="75">
+          <el-table-column align="center" label="ID" width="55">
+            <template slot-scope="scope">
+              {{ scope.$index }}
+            </template>
+          </el-table-column>
+          <el-table-column align="center" label="藏品ID" width="75">
             <template slot-scope="scope">
               {{ scope.row.pk }}
             </template>
           </el-table-column>
 
-          <el-table-column label="博物馆名" width="300" align="center">
+          <el-table-column label="藏品名称" width="220" align="center">
             <template slot-scope="scope">
 
-              <el-button size="middle" @click="handleSelect(scope.row)">{{ scope.row.fields.museumname }}</el-button>
+              <el-button size="middle" @click="handleSelect(scope.row)">{{ scope.row.fields.collectionname }}</el-button>
 
             </template>
 
           </el-table-column>
 
-          <el-table-column label="地址" align="center">
+          <el-table-column label="藏品介绍" align="center" width="550">
             <template slot-scope="scope">
-              <span>{{ scope.row.fields.location }}</span>
+              <span>{{ scope.row.fields.collectionintroduction }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="藏品年代" align="center">
+            <template slot-scope="scope">
+              <span>{{ scope.row.fields.collection_age }}</span>
             </template>
           </el-table-column>
 
-          <el-table-column label="官网链接" align="center" width="200">
+          <el-table-column label="图片链接" align="center" width="200">
             <template slot-scope="scope">
-              <a href=""> {{ scope.row.fields.link }} </a>
+              <a href=""> {{ scope.row.fields.collectionimage }} </a>
             </template>
           </el-table-column>
 
-          <el-table-column class-name="status-col" label="Status" width="80" align="center">
+          <el-table-column class-name="status-col" label="Status" align="center">
             <template slot-scope="scope">
               <el-tag :type="scope.row.fields.status | statusFilter">{{ scope.row.fields.status }}</el-tag>
             </template>
           </el-table-column>
 
-          <el-table-column align="center" prop="created_at" label="开放时间" width="300">
+          <el-table-column align="center" prop="created_at" label="所属博物馆ID">
             <template slot-scope="scope">
-              <i class="el-icon-time" />
-              <span>{{ scope.row.fields.opentime }}</span>
+              <span>{{ scope.row.fields.museumid }}</span>
             </template>
           </el-table-column>
 
@@ -300,7 +308,7 @@
 </template>
 
 <script>
-import { getList } from '@/api/table'
+import { getCollectionList } from '@/api/table'
 
 export default {
   filters: {
@@ -408,9 +416,8 @@ export default {
 
     fetchData() {
       this.listLoading = true
-      getList().then(response => {
+      getCollectionList().then(response => {
         this.list = response.data.items
-        console.log(response.data.items.fields)
         this.listLoading = false
       })
     },
