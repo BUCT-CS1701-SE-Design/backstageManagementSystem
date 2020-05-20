@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from backend.models import Academic, Collection, Education, Exhibition, Explanation, Museum, Museumnews, Museumrank, Usercomments, Userroles, Users
-from django.core import  serializers
 import json
-
+from django.core import serializers
+from django.middleware.csrf import get_token
+from django.contrib.auth import authenticate, login, logout
 
 def vuetest(request):
     if request.method == "POST":
@@ -27,7 +28,17 @@ def Postman(request):
 
 def museum_test(request,id):
     testdata = int(id)
-    Museum_list = Museum.objects.filter(museumid = testdata)  # [:5]
+    Museum_list = Museum.objects.filter(museumid = testdata)
+    result = {}
+    jsondata = serializers.serialize('json', Museum_list)
+    jsondatautf8 = json.loads(jsondata, encoding='utf-8')
+    result = {
+        "code": 200,
+        "data": {
+            "total": len(Museum_list),
+            "items": jsondatautf8}
+    }
+
     '''
     result = []
     i = 1
@@ -46,8 +57,7 @@ def museum_test(request,id):
     data['total'] = len(Museum_list),
     data['code'] = 200,
     '''
-    jsondata = serializers.serialize('json',Museum_list)
-    return HttpResponse(jsondata)
+    return JsonResponse(result)
 
 def museum_add(request):
     museumid_add = 200
