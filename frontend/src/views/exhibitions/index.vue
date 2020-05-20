@@ -13,32 +13,57 @@
       <template>
         <el-table v-loading="listLoading" :data="list" element-loading-text="Loading" border fit highlight-current-row>
 
+          <!--索引-->
+          <el-table-column type="index" :index="indexMethod" />
+
           <el-table-column align="center" label="ID" width="75">
             <template slot-scope="scope">
               {{ scope.row.pk }}
             </template>
           </el-table-column>
 
-          <el-table-column label=" 展览主题 " width="300" align="center">
+          <el-table-column label=" 展览主题 " width="200" align="center">
             <template slot-scope="scope">
-              {{ scope.row.fields.exhibitiontheme }}
-              <el-button size="middle" @click="handleSelect(scope.row)">详情</el-button>
+
+              <el-button size="middle" @click="handleSelect(scope.$index,scope.row)">{{ scope.row.fields.exhibitiontheme }}</el-button>
 
             </template>
 
           </el-table-column>
 
-          <el-table-column label="展览介绍" align="center">
+          <el-table-column label="展览介绍" align="center" width="300">
             <template slot-scope="scope">
               <span>{{ scope.row.fields.exhibitionintroduction }}</span>
             </template>
           </el-table-column>
 
-          <el-table-column label="展览位置" align="center" width="200">
+          <el-table-column label="展览时间" align="center">
             <template slot-scope="scope">
-              <!-- <el-link href="" target="blank">默认链接</el-link> -->
+              {{ scope.row.fields.exhibitionTime }}
+            </template>
+          </el-table-column>
 
-              {{ scope.row.fields.exhibitionlocation }}
+          <el-table-column align="center" label="展览位置">
+            <template slot-scope="scope">
+              <span>{{ scope.row.fields.exhibitionLocation }}</span>
+            </template>
+          </el-table-column>
+
+          <el-table-column align="center" label="展览电话" width="100">
+            <template slot-scope="scope">
+              <span>{{ scope.row.fields.exhibitionTel }}</span>
+            </template>
+          </el-table-column>
+
+          <el-table-column align="center" label="展览事件" width="100">
+            <template slot-scope="scope">
+              <span>{{ scope.row.fields.exhibitionThingList }}</span>
+            </template>
+          </el-table-column>
+
+          <el-table-column align="center" label="展览图片" width="200">
+            <template slot-scope="scope">
+              <span>{{ scope.row.fields.exhibition_picture }}</span>
             </template>
           </el-table-column>
 
@@ -48,17 +73,10 @@
             </template>
           </el-table-column>
 
-          <el-table-column align="center" prop="created_at" label="展览时间" width="300">
+          <el-table-column fixed="right" label="操作" align="center" width="100">
             <template slot-scope="scope">
-              <i class="el-icon-time" />
-              <span>{{ scope.row.fields.exhibitiontime }}</span>
-            </template>
-          </el-table-column>
-
-          <el-table-column fixed="right" label="操作" align="center">
-            <template slot-scope="scope">
-              <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
-              <el-button size="small" @click="handleDeleteList(scope.row)">删除</el-button>
+              <el-button size="small" @click="handleEdit(scope.$index,scope.row)">编辑</el-button>
+              <el-button size="small" @click="handleDeleteList(scope.$index,scope.row)">删除</el-button>
             </template>
           </el-table-column>
 
@@ -67,71 +85,39 @@
     </div>  <!---div class="app-container"结束-->
 
     <!--新增界面-->
-    <el-dialog title="新增博物馆信息" :visible.sync="addFormVisible" :close-on-click-modal="false">
+    <el-dialog title="新增展览信息" :visible.sync="addFormVisible" :close-on-click-modal="false">
       <el-form ref="addForm" :inline="true" :model="addForm" label-width="80px" :rules="addFormRules">
 
-        <el-form-item label="ID" prop="museumID">
+        <el-form-item label="博物馆ID" prop="museumID">
           <el-input v-model="addForm.museumID" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="名称" prop="museumname">
-          <el-input v-model="addForm.museumname" auto-complete="off" />
+        <el-form-item label="展览ID" prop="exhibitionID">
+          <el-input v-model="addForm.exhibitionID" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="简介" prop="introduction">
-          <el-input v-model="addForm.introduction" auto-complete="off" />
+        <el-form-item label="展览时间" prop="exhibitionTime">
+          <el-input v-model="addForm.exhibitionTime" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="开放时间" prop="opentime">
-          <el-input v-model="addForm.opentime" auto-complete="off" />
+        <el-form-item label="展览主题" prop="exhibitionTheme">
+          <el-input v-model="addForm.exhibitionTheme" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="网址" prop="link">
-          <el-input v-model="addForm.link" auto-complete="off" />
+        <el-form-item label="展览介绍" prop="exhibitionIntroduction">
+          <el-input v-model="addForm.exhibitionIntroduction" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="位置" prop="location">
-          <el-input v-model="addForm.location" auto-complete="off" />
+        <el-form-item label="展览位置" prop="exhibitionLocation">
+          <el-input v-model="addForm.exhibitionLocation" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="label" prop="label">
-          <el-input v-model="addForm.label" auto-complete="off" />
+        <el-form-item label="展览事件" prop="exhibitionThingList">
+          <el-input v-model="addForm.exhibitionThingList" auto-complete="off" />
         </el-form-item>
 
-        <!--  <el-form-item label="新简介" prop="museum_introduction">
-					<el-input v-model="addForm.museum_introduction" auto-complete="off"></el-input>
-				</el-form-item>-->
-
-        <el-form-item label="等级" prop="grade">
-          <el-input v-model="addForm.grade" auto-complete="off" />
-        </el-form-item>
-
-        <el-form-item label="年参观量" prop="annual_visits">
-          <el-input v-model="addForm.annual_visits" auto-complete="off" />
-        </el-form-item>
-
-        <el-form-item label="面积" prop="area">
-          <el-input v-model="addForm.area" auto-complete="off" />
-        </el-form-item>
-
-        <el-form-item label="电话" prop="telephone">
-          <el-input v-model="addForm.telephone" auto-complete="off" />
-        </el-form-item>
-
-        <el-form-item label="门票" prop="admission_fee">
-          <el-input v-model="addForm.admission_fee" auto-complete="off" />
-        </el-form-item>
-
-        <el-form-item label="建设时间" prop="building_time">
-          <el-input v-model="addForm.building_time" auto-complete="off" />
-        </el-form-item>
-
-        <el-form-item label="藏品数量" prop="collection_number">
-          <el-input v-model="addForm.collection_number" auto-complete="off" />
-        </el-form-item>
-
-        <el-form-item label="城市" prop="city">
-          <el-input v-model="addForm.city" auto-complete="off" />
+        <el-form-item label="展览图片" prop="exhibition_picture">
+          <el-input v-model="addForm.exhibition_picture" auto-complete="off" />
         </el-form-item>
 
         <el-form-item label="status" prop="status">
@@ -144,7 +130,8 @@
       <div slot="footer" class="dialog-footer">
         <el-button @click="addFormVisible = false">取消</el-button>
         <!--<el-button type="primary" @click="addSubmit" :loading="addLoading">提交</el-button>
-        -->
+       -->
+
       </div>
     </el-dialog>
     <!--新增界面结束-->
@@ -153,64 +140,40 @@
     <el-dialog title="详细信息" :visible.sync="selectFormVisible" :close-on-click-modal="false">
       <el-form ref="selectForm" :inline="true" :model="selectForm" label-width="80px">
 
-        <el-form-item label="ID" prop="museumID">
+        <el-form-item label="博物馆ID" prop="museumID">
           <el-input v-model="selectForm.museumID" auto-complete="off" :disabled="true" />
         </el-form-item>
 
-        <el-form-item label="名称" prop="museumname">
-          <el-input v-model="selectForm.museumname" auto-complete="off" :disabled="true" />
+        <el-form-item label="展览ID" prop="exhibitionID">
+          <el-input v-model="selectForm.exhibitionID" auto-complete="off" :disabled="true" />
         </el-form-item>
 
-        <el-form-item label="简介" prop="introduction">
-          <el-input v-model="selectForm.introduction" auto-complete="off" :disabled="true" />
+        <el-form-item label="展览时间" prop="exhibitionTime">
+          <el-input v-model="selectForm.exhibitionTime" auto-complete="off" :disabled="true" />
         </el-form-item>
 
-        <el-form-item label="开放时间" prop="opentime">
-          <el-input v-model="selectForm.opentime" auto-complete="off" :disabled="true" />
+        <el-form-item label="展览主题" prop="exhibitionTheme">
+          <el-input v-model="selectForm.exhibitionTheme" auto-complete="off" :disabled="true" />
         </el-form-item>
 
-        <el-form-item label="网址" prop="link">
-          <el-input v-model="selectForm.link" auto-complete="off" :disabled="true" />
+        <el-form-item label="展览介绍" prop="exhibitionIntroduction">
+          <el-input v-model="selectForm.exhibitionIntroduction" auto-complete="off" :disabled="true" />
         </el-form-item>
 
-        <el-form-item label="位置" prop="location">
-          <el-input v-model="selectForm.location" auto-complete="off" :disabled="true" />
+        <el-form-item label="展览位置" prop="exhibitionLocation">
+          <el-input v-model="selectForm.exhibitionLocation" auto-complete="off" :disabled="true" />
         </el-form-item>
 
-        <el-form-item label="label" prop="label">
-          <el-input v-model="selectForm.label" auto-complete="off" :disabled="true" />
+        <el-form-item label="展览电话" prop="exhibitionTel">
+          <el-input v-model="selectForm.exhibitionTel" auto-complete="off" :disabled="true" />
         </el-form-item>
 
-        <el-form-item label="等级" prop="grade">
-          <el-input v-model="selectForm.grade" auto-complete="off" :disabled="true" />
+        <el-form-item label="展览事件" prop="exhibitionThingList">
+          <el-input v-model="selectForm.exhibitionThingList" auto-complete="off" :disabled="true" />
         </el-form-item>
 
-        <el-form-item label="年参观量" prop="annual_visits">
-          <el-input v-model="selectForm.annual_visits" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="面积" prop="area">
-          <el-input v-model="selectForm.area" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="电话" prop="telephone">
-          <el-input v-model="selectForm.telephone" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="门票" prop="admission_fee">
-          <el-input v-model="selectForm.admission_fee" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="建设时间" prop="building_time">
-          <el-input v-model="selectForm.building_time" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="藏品数量" prop="collection_number" :disabled="true">
-          <el-input v-model="selectForm.collection_number" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="城市" prop="city">
-          <el-input v-model="selectForm.city" auto-complete="off" :disabled="true" />
+        <el-form-item label="展览图片" prop="exhibition_picture">
+          <el-input v-model="selectForm.exhibition_picture" auto-complete="off" :disabled="true" />
         </el-form-item>
 
         <el-form-item label="status" prop="status">
@@ -227,64 +190,40 @@
     <el-dialog title="编辑" :visible.sync="editFormVisible" :close-on-click-modal="false">
       <el-form ref="editForm" :inline="true" :model="editForm" label-width="80px" :rules="addFormRules">
 
-        <el-form-item label="ID" prop="museumID">
+        <el-form-item label="博物馆ID" prop="museumID">
           <el-input v-model="editForm.museumID" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="名称" prop="museumname">
-          <el-input v-model="editForm.museumname" auto-complete="off" />
+        <el-form-item label="展览ID" prop="exhibitionID">
+          <el-input v-model="editForm.exhibitionID" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="简介" prop="introduction">
-          <el-input v-model="editForm.introduction" auto-complete="off" />
+        <el-form-item label="展览时间" prop="exhibitionTime">
+          <el-input v-model="editForm.exhibitionTime" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="开放时间" prop="opentime">
-          <el-input v-model="editForm.opentime" auto-complete="off" />
+        <el-form-item label="展览主题" prop="exhibitionTheme">
+          <el-input v-model="editForm.exhibitionTheme" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="网址" prop="link">
-          <el-input v-model="editForm.link" auto-complete="off" />
+        <el-form-item label="展览介绍" prop="exhibitionIntroduction">
+          <el-input v-model="editForm.exhibitionIntroduction" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="位置" prop="location">
-          <el-input v-model="editForm.location" auto-complete="off" />
+        <el-form-item label="展览位置" prop="exhibitionLocation">
+          <el-input v-model="editForm.exhibitionLocation" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="label" prop="label">
-          <el-input v-model="editForm.label" auto-complete="off" />
+        <el-form-item label="展览电话" prop="exhibitionTel">
+          <el-input v-model="editForm.exhibitionTel" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="等级" prop="grade">
-          <el-input v-model="editForm.grade" auto-complete="off" />
+        <el-form-item label="展览事件" prop="exhibitionThingList">
+          <el-input v-model="editForm.exhibitionThingList" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="年参观量" prop="annual_visits">
-          <el-input v-model="editForm.annual_visits" auto-complete="off" />
-        </el-form-item>
-
-        <el-form-item label="面积" prop="area">
-          <el-input v-model="editForm.area" auto-complete="off" />
-        </el-form-item>
-
-        <el-form-item label="电话" prop="telephone">
-          <el-input v-model="editForm.telephone" auto-complete="off" />
-        </el-form-item>
-
-        <el-form-item label="门票" prop="admission_fee">
-          <el-input v-model="editForm.admission_fee" auto-complete="off" />
-        </el-form-item>
-
-        <el-form-item label="建设时间" prop="building_time">
-          <el-input v-model="editForm.building_time" auto-complete="off" />
-        </el-form-item>
-
-        <el-form-item label="藏品数量" prop="collection_number">
-          <el-input v-model="editForm.collection_number" auto-complete="off" />
-        </el-form-item>
-
-        <el-form-item label="城市" prop="city">
-          <el-input v-model="editForm.city" auto-complete="off" />
+        <el-form-item label="展览图片" prop="exhibition_picture">
+          <el-input v-model="editForm.exhibition_picture" auto-complete="off" />
         </el-form-item>
 
         <el-form-item label="status" prop="status">
@@ -314,6 +253,7 @@ export default {
       return statusMap[status]
     }
   },
+
   data() {
     return {
       list: null,
@@ -326,27 +266,20 @@ export default {
       // 输入框验证
       addFormRules: {
         museumID: [{ required: true, message: '请输入博物馆ID', trigger: 'blur' }],
-        museumname: [{ required: true, message: '请输入博物馆名称', trigger: 'blur' }],
-        status: [{ required: true, message: '请输入博物馆状态', trigger: 'blur' }]
+        exhibitionID: [{ required: true, message: '请输入展览ID', trigger: 'blur' }],
+        exhibitionTheme: [{ required: true, message: '请输入展览主题', trigger: 'blur' }],
+        status: [{ required: true, message: '请输入状态', trigger: 'blur' }]
       },
       // 新增界面数据
       addForm: {
         museumID: '',
-        museumname: '',
-        introduction: '',
-        opentime: '',
-        link: '',
-        location: '',
-        label: '',
-        //  museum_introduction: "",
-        grade: '',
-        annual_visits: '',
-        area: '',
-        telephone: '',
-        admission_fee: '',
-        building_time: '',
-        collection_number: '',
-        city: '',
+        exhibitionID: '',
+        exhibitionTime: '',
+        exhibitionIntroduction: '',
+        exhibitionLocation: '',
+        exhibitionTel: '',
+        exhibitionThingList: '',
+        exhibition_picture: '',
         status: ''
       },
 
@@ -354,21 +287,13 @@ export default {
       selectFormVisible: false,
       selectForm: {
         museumID: '',
-        museumname: '',
-        introduction: '',
-        opentime: '',
-        link: '',
-        location: '',
-        label: '',
-        //  museum_introduction: "",
-        grade: '',
-        annual_visits: '',
-        area: '',
-        telephone: '',
-        admission_fee: '',
-        building_time: '',
-        collection_number: '',
-        city: '',
+        exhibitionID: '',
+        exhibitionTime: '',
+        exhibitionIntroduction: '',
+        exhibitionLocation: '',
+        exhibitionTel: '',
+        exhibitionThingList: '',
+        exhibition_picture: '',
         status: ''
       },
 
@@ -379,25 +304,19 @@ export default {
       // 编辑规则
       addFormRules: {
         museumID: [{ required: true, message: '请输入博物馆ID', trigger: 'blur' }],
-        museumname: [{ required: true, message: '请输入博物馆名称', trigger: 'blur' }],
-        status: [{ required: true, message: '请输入博物馆状态', trigger: 'blur' }]
+        exhibitionID: [{ required: true, message: '请输入展览ID', trigger: 'blur' }],
+        exhibitionTheme: [{ required: true, message: '请输入展览主题', trigger: 'blur' }],
+        status: [{ required: true, message: '请输入状态', trigger: 'blur' }]
       },
       editForm: {
         museumID: '',
-        museumname: '',
-        introduction: '',
-        opentime: '',
-        link: '',
-        location: '',
-        label: '',
-        grade: '',
-        annual_visits: '',
-        area: '',
-        telephone: '',
-        admission_fee: '',
-        building_time: '',
-        collection_number: '',
-        city: '',
+        exhibitionID: '',
+        exhibitionTime: '',
+        exhibitionIntroduction: '',
+        exhibitionLocation: '',
+        exhibitionTel: '',
+        exhibitionThingList: '',
+        exhibition_picture: '',
         status: ''
       }
     }// end return
@@ -406,7 +325,13 @@ export default {
   created() {
     this.fetchData()
   },
+
   methods: {
+
+    // table序号
+    indexMethod(index) {
+      return index + 1
+    },
 
     fetchData() {
       this.listLoading = true
@@ -454,13 +379,13 @@ export default {
     },
 
     // 查看详细信息
-    handleSelect: function(row) {
+    handleSelect: function(index, row) {
       this.selectFormVisible = true
       this.selectForm = Object.assign({}, row.fields)
     },
 
     // 显示编辑界面
-    handleEdit: function(row) {
+    handleEdit: function(index, row) {
       this.editFormVisible = true
       this.editForm = Object.assign({}, row.fields)
     },
@@ -518,7 +443,7 @@ export default {
     },
 
     // 删除
-    handleDeleteList: function(row) {
+    handleDeleteList: function(idnex, row) {
       this.$confirm('确认删除该记录吗?', '提示', {
         type: 'warning'
       })
@@ -530,28 +455,7 @@ export default {
           })
         }
         )
-      /*
-        .then(() => {
-          this.listLoading = true;
-          let param = new URLSearchParams();
-          param.append("ids", id);
-          console.log("ids:" + param);
-          this.$ajax({
-            method: "post",
-            url: "/api/sysuser-api/delSysUserByUserId",
-            data: param
-          }).then(res => {
-            this.listLoading = false;
-            this.$message({
-              message: "删除成功",
-              type: "success"
-            });
-            this.selectList = [];
-            this.getResult(1);
-          });
-        })
-        .catch(() => {});*/
-    }
+    } // end 删除
 
   }
 }

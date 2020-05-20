@@ -35,3 +35,11 @@ export function getCommentList(params) {
     params
   })
 }
+
+export function getexplainationsList(params) {
+  return request({
+    url: '/explanationtest',
+    method: 'get',
+    params
+  })
+}
