@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from backend.models import Academic, Collection, Education, Exhibition, Explanation, Museum, Museumnews, Museumrank, Usercomments, Userroles, Users
 import json
 from django.core import serializers
+from django.middleware.csrf import get_token
+from django.contrib.auth import authenticate, login, logout
 
 
 def vuetest(request):
@@ -27,6 +29,15 @@ def Postman(request):
 def explanation_test(request):
     test_explanationid = 12
     Explanation_list = Explanation.objects.filter(explanationid = test_explanationid)
+    result = {}
+    jsondata = serializers.serialize('json', Explanation_list)
+    jsondatautf8 = json.loads(jsondata, encoding='utf-8')
+    result = {
+        "code": 200,
+        "data": {
+            "total": len(Explanation_list),
+            "items": jsondatautf8}
+    }
     '''
     result = []
     i = 1
@@ -47,8 +58,7 @@ def explanation_test(request):
     result.append(data)
     return HttpResponse(json.dumps(result))
 '''
-    jsondata = serializers.serialize('json',Explanation_list)
-    return HttpResponse(jsondata)
+    return JsonResponse(result)
 
 def explanation_add(request):
     explanationid_add = 200

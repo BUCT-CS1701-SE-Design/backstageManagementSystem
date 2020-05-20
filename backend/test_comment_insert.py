@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from backend.models import Academic, Collection, Education, Exhibition, Explanation, Museum, Museumnews, Museumrank, Usercomments, Userroles, Users
 import json
 from django.core import serializers
+from django.middleware.csrf import get_token
+from django.contrib.auth import authenticate, login, logout
 
 def comment_test(request):
     result = []
@@ -34,9 +36,18 @@ def comment_test_admin(request):
     return HttpResponse(json.dumps(result))
 
 def comment_get(request):
-    Usercomments_list = Usercomments.objects.all()
+    testdata=12
+    Usercomments_list = Usercomments.objects.filter(museumid = testdata)
     jsondata = serializers.serialize('json', Usercomments_list)
-    return HttpResponse(jsondata)
+    result = {}
+    jsondatautf8 = json.loads(jsondata, encoding='utf-8')
+    result = {
+        "code": 200,
+        "data": {
+            "total": len(Usercomments_list),
+            "items": jsondatautf8}
+    }
+    return JsonResponse(result)
 
 def comment_add(request):
     userid_add = 400
