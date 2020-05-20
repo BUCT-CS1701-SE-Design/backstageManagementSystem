@@ -25,7 +25,8 @@ def Postman(request):
     return HttpResponse(result)
 
 def explanation_test(request):
-    Explanation_list = Explanation.objects.all()
+    test_explanationid = 12
+    Explanation_list = Explanation.objects.filter(explanationid = test_explanationid)
     '''
     result = []
     i = 1

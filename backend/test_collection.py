@@ -26,7 +26,8 @@ def Postman(request):
 
 
 def collection_test(request):
-    Collection_list = Collection.objects.all()
+    testdata = 12
+    Collection_list = Collection.objects.filter(museumid = testdata)
     '''
     result = []
     i = 1
