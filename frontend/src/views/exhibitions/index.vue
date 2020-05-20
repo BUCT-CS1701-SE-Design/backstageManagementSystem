@@ -21,8 +21,8 @@
 
           <el-table-column label=" 展览主题 " width="300" align="center">
             <template slot-scope="scope">
-
-              <el-button size="middle" @click="handleSelect(scope.row)">{{ scope.row.fields.exhibitiontheme }}</el-button>
+              {{ scope.row.fields.exhibitiontheme }}
+              <el-button size="middle" @click="handleSelect(scope.row)">详情</el-button>
 
             </template>
 
@@ -34,9 +34,11 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="官网链接" align="center" width="200">
+          <el-table-column label="展览位置" align="center" width="200">
             <template slot-scope="scope">
-              <a href=""> {{ scope.row.fields.link }} </a>
+              <!-- <el-link href="" target="blank">默认链接</el-link> -->
+
+              {{ scope.row.fields.exhibitionlocation }}
             </template>
           </el-table-column>
 
@@ -46,10 +48,10 @@
             </template>
           </el-table-column>
 
-          <el-table-column align="center" prop="created_at" label="开放时间" width="300">
+          <el-table-column align="center" prop="created_at" label="展览时间" width="300">
             <template slot-scope="scope">
               <i class="el-icon-time" />
-              <span>{{ scope.row.fields.opentime }}</span>
+              <span>{{ scope.row.fields.exhibitiontime }}</span>
             </template>
           </el-table-column>
 

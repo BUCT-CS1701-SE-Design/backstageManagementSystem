@@ -62,6 +62,9 @@
 
         </el-table>
       </template><!--页面表格结束-->
+
+      <!-- 分页 -->
+      <el-pagination :current-page="currentPage" :page-size="pageSize" layout="total, prev, pager, next" :total="count" @current-change="getResult" />
     </div>  <!---div class="app-container"结束-->
 
     <!--新增界面-->
@@ -316,6 +319,11 @@ export default {
     return {
       list: null,
       listLoading: true,
+
+      // 分页
+      count: 0,
+      currentPage: 1,
+      pageSize: 10,
 
       // 新增界面是否显示
       addFormVisible: false,

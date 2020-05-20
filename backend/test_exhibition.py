@@ -21,7 +21,7 @@ def exhibithion_test(request,id):
     return JsonResponse(result)
 
 def Exhibition_All(request):
-    Exhibition_list = Exhibition.objects.all()
+    Exhibition_list = Exhibition.objects.all()[:1]
     result = {}
     jsondata = serializers.serialize('json',Exhibition_list)
     jsondatautf8 = json.loads(jsondata, encoding='utf-8')
