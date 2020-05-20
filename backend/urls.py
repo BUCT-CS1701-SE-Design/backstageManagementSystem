@@ -7,6 +7,7 @@ import backend.test_museum as api2
 import backend.test_exhibition as exhibition
 import backend.test_collection as api4
 import backend.test_explanation as api5
+import backend.test_users as user
 
 from . import views
 
@@ -56,7 +57,10 @@ urlpatterns = [
     path('explanationdelete',api5.explanation_delete),
     path('explanationchange',api5.explanation_change),
 
-
+    path('userstest/<int:id>/',user.users_test),
+    path('usersadd',user.users_add),
+    path('usersdelete',user.users_delete),
+    path('userschange',user.users_change),
 
 ]
 
