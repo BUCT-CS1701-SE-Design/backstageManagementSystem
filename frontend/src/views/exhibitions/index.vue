@@ -44,7 +44,7 @@
           </el-table-column>
           <el-table-column label="所属博物馆" align="center">
             <template slot-scope="scope">
-              {{ scope.row.fields.museumid|museumIDfilter }}
+              {{ scope.row.fields.museumid | museumIDfilter }}
             </template>
           </el-table-column>
 
