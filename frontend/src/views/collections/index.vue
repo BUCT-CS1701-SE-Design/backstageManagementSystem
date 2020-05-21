@@ -96,6 +96,8 @@
           <el-input v-model="addForm.collectionintroduction" type="textarea" auto-complete="off" />
         </el-form-item>
 
+
+
         <el-form-item label="藏品年代" prop="collection_age">
           <el-input v-model="addForm.collection_age" auto-complete="off" />
         </el-form-item>
