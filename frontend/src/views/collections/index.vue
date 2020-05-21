@@ -159,6 +159,7 @@
       </div>
     </el-dialog> <!--详细界面结束-->
 
+
     <!--编辑界面-->
     <el-dialog title="编辑" :visible.sync="editFormVisible" :close-on-click-modal="false">
       <el-form ref="editForm" :inline="true" :model="editForm" label-width="80px" :rules="addFormRules">

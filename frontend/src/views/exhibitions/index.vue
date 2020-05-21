@@ -66,6 +66,7 @@
             </template>
           </el-table-column>
 
+
           <el-table-column align="center" label="展览图片">
             <template slot-scope="scope">
               <span>{{ scope.row.fields.exhibition_picture |ellipsis20}}</span>
