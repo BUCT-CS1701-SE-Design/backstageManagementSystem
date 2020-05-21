@@ -144,8 +144,8 @@
       <!--提交或者取消-->
       <div slot="footer" class="dialog-footer">
         <el-button @click="addFormVisible = false">取消</el-button>
-        <!--<el-button type="primary" @click="addSubmit" :loading="addLoading">提交</el-button>
-        -->
+        <el-button type="primary" :loading="addLoading" @click="addSubmit">提交</el-button>
+
       </div>
     </el-dialog>
     <!--新增界面结束-->

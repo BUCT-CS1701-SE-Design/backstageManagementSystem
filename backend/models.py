@@ -76,20 +76,10 @@ class AuthUserGroups(models.Model):
         unique_together = (('user', 'group'),)
 
 
-class AuthUserUserPermissions(models.Model):
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
-    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_user_user_permissions'
-        unique_together = (('user', 'permission'),)
-
-
 class Collection(models.Model):
     collectionid = models.AutoField(db_column='CollectionID', primary_key=True)  # Field name made lowercase.
     museumid = models.ForeignKey('Museum', models.DO_NOTHING, db_column='museumID')  # Field name made lowercase.
-    collectionname = models.CharField(db_column='collectionName', max_length=45)  # Field name made lowercase.
+    collectionname = models.CharField(db_column='collectionName', unique=True, max_length=128)  # Field name made lowercase.
     collectionintroduction = models.TextField(db_column='collectionIntroduction', blank=True, null=True)  # Field name made lowercase.
     collection_age = models.TextField(blank=True, null=True)
     collectionimage = models.TextField(db_column='collectionImage', blank=True, null=True)  # Field name made lowercase.
@@ -160,7 +150,7 @@ class Exhibition(models.Model):
     exhibitionid = models.AutoField(db_column='exhibitionID', primary_key=True)  # Field name made lowercase.
     museumid = models.ForeignKey('Museum', models.DO_NOTHING, db_column='museumID')  # Field name made lowercase.
     exhibitiontime = models.CharField(db_column='exhibitionTime', max_length=128, blank=True, null=True)  # Field name made lowercase.
-    exhibitiontheme = models.CharField(db_column='exhibitionTheme', max_length=128, blank=True, null=True)  # Field name made lowercase.
+    exhibitiontheme = models.CharField(db_column='exhibitionTheme', unique=True, max_length=128)  # Field name made lowercase.
     exhibitionintroduction = models.TextField(db_column='exhibitionIntroduction', blank=True, null=True)  # Field name made lowercase.
     exhibitionlocation = models.TextField(db_column='exhibitionLocation', blank=True, null=True)  # Field name made lowercase.
     exhibitiontel = models.TextField(db_column='exhibitionTel', blank=True, null=True)  # Field name made lowercase.
@@ -219,6 +209,7 @@ class Museumnews(models.Model):
     newsmaintext = models.TextField()
     positive_negative = models.CharField(db_column='positive/negative', max_length=45)  # Field renamed to remove unsuitable characters.
     status = models.PositiveIntegerField()
+    imageurl = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
