@@ -110,7 +110,7 @@
       </div>
     </el-dialog>
     <!--新增界面结束-->
-
+    
     <!--详细界面-->
     <el-dialog title="用户详细信息" :visible.sync="selectFormVisible" :close-on-click-modal="false">
       <el-card>

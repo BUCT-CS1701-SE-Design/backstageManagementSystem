@@ -118,6 +118,7 @@
     <el-dialog title="详细信息" :visible.sync="selectFormVisible" :close-on-click-modal="false">
        <el-card>
       
+      
   <div   class="text item">
      {{"博物馆ID: "+selectForm.museumid}}
      <br><br>

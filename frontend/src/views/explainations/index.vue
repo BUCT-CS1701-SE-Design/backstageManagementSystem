@@ -303,6 +303,7 @@ export default {
       })
     },
 
+
     fetchData() {
       this.listLoading = true
       getexplainationsList().then(response => {

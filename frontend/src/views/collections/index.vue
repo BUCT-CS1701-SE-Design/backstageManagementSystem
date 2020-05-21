@@ -120,7 +120,6 @@
 
     <!--详细界面-->
     <el-dialog title="详细信息" :visible.sync="selectFormVisible" :close-on-click-modal="false">
-
       <el-card>
       
   <div   class="text item">
