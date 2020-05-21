@@ -27,7 +27,7 @@ urlpatterns = [
     path('Exhibitionrank',api.Exhibitionrank),
     path('news',api.News),
     path('citymuseum',api.Citymuseum),
-    path('exhibition',api.TestEx),
+    path('exhibitionex',api.TestEx),
     path('news',api.News),
     path('citymuseum',api.Citymuseum),
 
