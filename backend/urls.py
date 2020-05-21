@@ -22,6 +22,11 @@ urlpatterns = [
     path('info',api.infoo),
     path('loginout',api.loginout),
 
+    path('collectionrank',api.Collectionrank),
+    path('Newsrank',api.Newsrank),
+    path('Exhibitionrank',api.Exhibitionrank),
+    path('news',api.News),
+    path('citymuseum',api.Citymuseum),
     path('exhibition',api.TestEx),
     path('news',api.News),
     path('citymuseum',api.Citymuseum),
