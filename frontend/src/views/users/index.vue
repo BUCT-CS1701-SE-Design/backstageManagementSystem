@@ -112,42 +112,26 @@
     <!--新增界面结束-->
 
     <!--详细界面-->
-    <el-dialog title="详细信息" :visible.sync="selectFormVisible" :close-on-click-modal="false">
-      <el-form ref="selectForm" :inline="true" :model="selectForm" label-width="80px">
-
-        <el-form-item label="用户ID" prop="idcard" >
-          <el-input v-model="selectForm.idcard" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-       
-
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="selectForm.username" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="用户昵称" prop="nickname">
-          <el-input v-model="selectForm.nickname" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="密码"  prop="password">
-          <el-input v-model="selectForm.password"  auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-
-
-        <el-form-item label="角色" prop="userrole">
-          <el-input v-model="selectForm.userrole" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="创建时间" prop="usercreatedate">
-          
-          <el-input v-model="selectForm.usercreatedate" auto-complete="off" :disabled="true"  />
-        </el-form-item>
-
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="selectFormVisible = false">取消</el-button>
-      </div>
+    <el-dialog title="用户详细信息" :visible.sync="selectFormVisible" :close-on-click-modal="false">
+      <el-card>
+      
+  <div   class="text item">
+     {{"用户ID: "+selectForm.idcard}}
+     <br><br>
+    
+      {{"用户名： "+selectForm.username}}
+       <br><br>
+       {{"用户昵称： "+selectForm.nickname}}
+        <br><br>
+        {{"密码： "+selectForm.password}}
+        <br><br>
+        {{"角色: "+selectForm.userrole}}
+         <br><br>
+         {{"创建时间: "+selectForm.usercreatedate}}
+        
+  </div>
+</el-card>
+    
     </el-dialog> <!--详细界面结束-->
 
     <!--编辑界面-->

@@ -152,76 +152,47 @@
 
     <!--详细界面-->
     <el-dialog title="详细信息" :visible.sync="selectFormVisible" :close-on-click-modal="false">
-      <el-form ref="selectForm" :inline="true" :model="selectForm" label-width="80px">
+  <el-card>
+      
+  <div   class="text item">
+     {{"博物馆ID: "+selectForm.museumid}}
+     <br><br>
+    {{"博物馆名称:  "+selectForm.museumname}}
+      <br><br>
+      {{"简介： "+selectForm.introduction}}
+       <br><br>
+       {{"开放时间： "+selectForm.opentime}}
+        <br><br>
+        {{"网址： "+selectForm.link}}
+        <br><br>
+        {{"位置: "+selectForm.location}}
+         <br><br>
+         {{"label: "+selectForm.label}}
+         <br><br>
+         {{"等级: "+selectForm.grade}}
+         <br><br>
+         {{"年参观量: "+selectForm.annual_visits}}
+         <br><br>
+         {{"面积: "+selectForm.area}}
+         <br><br>
+         {{"电话: "+selectForm.telephone}}
+           <br><br>
+         {{"门票: "+selectForm.admission_fee}}
+           <br><br>
+         {{"建设时间: "+selectForm.building_time}}
+           <br><br>
+         {{"藏品数量: "+selectForm.collection_number}}
+          <br><br>
+         {{"城市: "+selectForm.city}}
+          <br><br>
+         {{"status: "+selectForm.status}}
 
-        <el-form-item label="ID" prop="museumID">
-          <el-input v-model="selectForm.museumID" auto-complete="off" :disabled="true" />
-        </el-form-item>
 
-        <el-form-item label="名称" prop="museumname">
-          <el-input v-model="selectForm.museumname" auto-complete="off" :disabled="true" />
-        </el-form-item>
+  </div>
+</el-card>
 
-        <el-form-item label="简介" prop="introduction">
-          <el-input v-model="selectForm.introduction" type="textarea" auto-complete="off" :disabled="true" />
-        </el-form-item>
 
-        <el-form-item label="开放时间" prop="opentime">
-          <el-input v-model="selectForm.opentime" type="textarea" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="网址" prop="link">
-          <el-input v-model="selectForm.link" type="textarea" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="位置" prop="location">
-          <el-input v-model="selectForm.location" type="textarea" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="label" prop="label">
-          <el-input v-model="selectForm.label" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="等级" prop="grade">
-          <el-input v-model="selectForm.grade" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="年参观量" prop="annual_visits">
-          <el-input v-model="selectForm.annual_visits" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="面积" prop="area">
-          <el-input v-model="selectForm.area" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="电话" prop="telephone">
-          <el-input v-model="selectForm.telephone" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="门票" prop="admission_fee">
-          <el-input v-model="selectForm.admission_fee" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="建设时间" prop="building_time">
-          <el-input v-model="selectForm.building_time" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="藏品数量" prop="collection_number" :disabled="true">
-          <el-input v-model="selectForm.collection_number" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="城市" prop="city">
-          <el-input v-model="selectForm.city" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="status" prop="status">
-          <el-input v-model="selectForm.status" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="selectFormVisible = false">取消</el-button>
-      </div>
+      
     </el-dialog> <!--详细界面结束-->
 
     <!--编辑界面-->

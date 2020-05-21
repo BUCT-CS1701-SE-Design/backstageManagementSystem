@@ -120,40 +120,27 @@
 
     <!--详细界面-->
     <el-dialog title="详细信息" :visible.sync="selectFormVisible" :close-on-click-modal="false">
-      <el-form ref="selectForm" :inline="true" :model="selectForm" label-width="80px">
 
-        <el-form-item label="所属博物馆ID" prop="museumid">
-          <el-input v-model="selectForm.museumid" auto-complete="off" :disabled="true" />
-        </el-form-item>
+      <el-card>
+      
+  <div   class="text item">
+     {{"博物馆ID: "+selectForm.museumid}}
+     <br><br>
+    {{"博物馆名称:  "}}  {{selectForm.museumid|museumIDfilter}}
+      <br><br>
+      {{"藏品名称： "+selectForm.collectionname}}
+       <br><br>
+       {{"藏品介绍： "+selectForm.collectionintroduction}}
+        <br><br>
+        {{"藏品年代： "+selectForm.collection_age}}
+        <br><br>
+        {{"图片链接: "+selectForm.collectionimage}}
+         <br><br>
+         {{"status: "+selectForm.status}}
+  </div>
+</el-card>
 
-        <!-- <el-form-item label="藏品ID" prop="CollectionID">
-          <el-input v-model="selectForm.CollectionID" auto-complete="off" :disabled="true" />
-        </el-form-item> -->
-
-        <el-form-item label="藏品名称" prop="collectionname">
-          <el-input v-model="selectForm.collectionname" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="藏品介绍" prop="collectionintroduction">
-          <el-input v-model="selectForm.collectionintroduction" type="textarea" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="藏品年代" prop="collection_age">
-          <el-input v-model="selectForm.collection_age" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="图片链接" prop="collectionimage">
-          <el-input v-model="selectForm.collectionimage" type="textarea" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="status" prop="status">
-          <el-input v-model="selectForm.status" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="selectFormVisible = false">取消</el-button>
-      </div>
+     
     </el-dialog> <!--详细界面结束-->
 
     <!--编辑界面-->
