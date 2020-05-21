@@ -163,6 +163,7 @@
     <el-dialog title="编辑" :visible.sync="editFormVisible" :close-on-click-modal="false">
       <el-form ref="editForm" :inline="true" :model="editForm" label-width="80px" :rules="addFormRules">
 
+
         <el-form-item label="博物馆ID" prop="museumid">
           <el-input v-model="editForm.museumid" auto-complete="off" />
         </el-form-item>

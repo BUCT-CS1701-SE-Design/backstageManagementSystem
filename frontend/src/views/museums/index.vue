@@ -9,6 +9,7 @@
         <!--<el-button type="danger" icon="el-icon-delete" @click="handleDeleteList" size="mini" round>删除</el-button>-->
       </div>
 
+
       <!--页面表格显示信息--->
       <template>
         <el-table v-loading="listLoading" :data="list" element-loading-text="Loading" border fit highlight-current-row>

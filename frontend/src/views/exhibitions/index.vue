@@ -72,6 +72,7 @@
             </template>
           </el-table-column>
 
+
           <el-table-column class-name="status-col" label="Status" width="80" align="center">
             <template slot-scope="scope">
               <el-tag :type="scope.row.fields.status | statusFilter">{{ scope.row.fields.status }}</el-tag>
