@@ -244,7 +244,6 @@ export default {
         explanationLanguage: '',
         recommendedTime: '',
         status: ''
-
       },
 
       // 查看详细信息页面是否显示
