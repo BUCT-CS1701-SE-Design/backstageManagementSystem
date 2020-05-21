@@ -1,4 +1,4 @@
-
+from django.db.models import Count
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from backend.models import Academic, Collection, Education, Exhibition, Explanation, Museum, Museumnews, Museumrank, \
@@ -7,8 +7,6 @@ import json
 from django.middleware.csrf import get_token
 from django.contrib.auth import authenticate, login, logout
 from django.core import serializers
-from django.db.models import Count
-
 
 
 # csrf认证
@@ -87,30 +85,11 @@ def Test(request):
     return JsonResponse(result)
 
 
-def TestEx(request):
-    Exhibition_list = Exhibition.objects.all()
-    jsondata = serializers.serialize('json',Exhibition_list)
-    jsondatautf8 = json.loads(jsondata, encoding='utf-8')
-
-    result = {
-        "code": 200,
-        "data": {
-            "total": len(Exhibition_list),
-            "items": jsondatautf8}
-    }
-    return  JsonResponse(result)
-
 def News(request):
-    News_list = Museumnews.objects.all()
+    News_list=Museumnews.objects.all()
+    
     jsondata = serializers.serialize('json',News_list)
-    jsondatautf8 = json.loads(jsondata, encoding='utf-8')
-    result = {
-        "code": 200,
-        "data": {
-            "total": len(News_list),
-            "items": jsondatautf8}
-    }
-    return  JsonResponse(result)
+    return HttpResponse(jsondata)
 
 def Citymuseum(request):
     city=request.GET.get('city')
@@ -129,9 +108,9 @@ def Citymuseum(request):
     fin.append(result)
     jsondata = serializers.serialize('json',Museum_list)
     return HttpResponse(json.dumps(result))
-
+    
 def Collectionrank(request):
-    rank_list=Museum.objects.order_by('collection_number')
+    rank_list=Museum.objects.annotate(num=Count('collection__collectionid')).order_by('-num')
     result=[]
     i=1
     for var in rank_list:
@@ -140,7 +119,7 @@ def Collectionrank(request):
             data['rank']=i
             data['museumid']=var.museumid
             data['museumname']=var.museumname
-            data['colllectionnum']=var.collection_number
+            data['colllectionnum']=var.num
             result.append(data)
         i+=1
         
@@ -186,7 +165,6 @@ def Exhibitionrank(request):
     fin.append(result)
     jsondata = serializers.serialize('json',rank_list)
     return HttpResponse(json.dumps(result))
-
 
 
 def Add(request):
