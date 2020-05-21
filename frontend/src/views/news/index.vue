@@ -34,15 +34,9 @@
             </template>
           </el-table-column>
 
-<<<<<<< HEAD
-          <el-table-column label="新闻标题" width="250" align="center">
-            <template slot-scope="scope">
-              <el-button size="middle" @click="handleSelect(scope.row)">{{ scope.row.fields.newstitle | ellipsis10 }}</el-button>
-=======
           <el-table-column label="新闻标题" width="200" align="center">
-            <template slot-scope="scope">{{ scope.row.fields.newstitle }}
+            <template slot-scope="scope">{{ scope.row.fields.newstitle | ellipsis10 }}
               <el-button size="middle" mulitline="true" @click="handleSelect(scope.row)">详情</el-button>
->>>>>>> 31f20f280426a8db7ee2f77d43f492c75e4a761e
             </template>
           </el-table-column>
 
@@ -71,10 +65,6 @@
             </template>
           </el-table-column>
 
-<<<<<<< HEAD
-          
-=======
->>>>>>> 31f20f280426a8db7ee2f77d43f492c75e4a761e
           <el-table-column fixed="right" label="操作" align="center">
             <template slot-scope="scope">
               <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
@@ -171,12 +161,7 @@
         </el-form-item>
 
         <el-form-item label="时间" prop="newstime">
-<<<<<<< HEAD
            <el-date-picker  v-model="addForm.newstime" type="date"  placeholder="选择日期" value-format="yyyy-MM-dd"></el-date-picker> 
-=======
-          <el-date-picker v-model="addForm.newstime" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" />
-          <!--el-input v-model="editForm.newstime" auto-complete="off" /-->
->>>>>>> 31f20f280426a8db7ee2f77d43f492c75e4a761e
         </el-form-item>
 
         <el-form-item label="性质" prop="positive_negative">
