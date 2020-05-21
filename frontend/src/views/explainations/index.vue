@@ -123,40 +123,26 @@
 
     <!--详细界面-->
     <el-dialog title="详细信息" :visible.sync="selectFormVisible" :close-on-click-modal="false">
-      <el-form ref="selectForm" :inline="true" :model="selectForm" label-width="80px">
 
-        <el-form-item label="讲解ID" prop="explanationID">
-          <el-input v-model="selectForm.explanationID" auto-complete="off" :disabled="true" />
-        </el-form-item>
+        <el-card>
+      
+  <div   class="text item">
+     {{"讲解ID: "+selectForm.explanationID}}
+     <br><br>
+    {{"讲解内容:  "+selectForm.explanationName}}
+      <br><br>
+      {{"讲解人ID： "+selectForm.explainerID}}
+       <br><br>
+       {{"讲解时间： "+selectForm.explanationTime}}
+        <br><br>
+        {{"讲解语言： "+selectForm.explanationLanguage}}
+        <br><br>
+        {{"推荐时间: "+selectForm.recommendedTime}}
+         <br><br>
+         {{"status: "+selectForm.status}}
+  </div>
+</el-card>
 
-        <el-form-item label="讲解内容" prop="explanationName">
-          <el-input v-model="selectForm.explanationName" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="讲解人ID" prop="explainerID">
-          <el-input v-model="selectForm.explainerID" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="讲解时间" prop="explanationTime">
-          <el-input v-model="selectForm.explanationTime" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="讲解语言" prop="explanationLanguage">
-          <el-input v-model="selectForm.explanationLanguage" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="推荐时间" prop="recommendedTime">
-          <el-input v-model="selectForm.recommendedTime" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="status" prop="status">
-          <el-input v-model="selectForm.status" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="selectFormVisible = false">取消</el-button>
-      </div>
     </el-dialog> <!--详细界面结束-->
 
     <!--编辑界面-->
@@ -316,6 +302,7 @@ export default {
         _this.listLoading = false
       })
     },
+
 
     fetchData() {
       this.listLoading = true
