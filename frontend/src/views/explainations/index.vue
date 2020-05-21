@@ -201,6 +201,7 @@
   </section>
 </template>
 
+
 <script>
 import { getexplainationsList } from '@/api/table'
 
