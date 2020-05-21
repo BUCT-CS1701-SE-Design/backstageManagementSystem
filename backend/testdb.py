@@ -86,7 +86,7 @@ def Test(request):
 
 
 def TestEx(request):
-    Exhibition_list = Exhibition.objects.all()  # [:2]
+    Exhibition_list = Exhibition.objects.all()
     jsondata = serializers.serialize('json',Exhibition_list)
     jsondatautf8 = json.loads(jsondata, encoding='utf-8')
 
