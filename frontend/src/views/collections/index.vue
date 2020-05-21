@@ -36,9 +36,9 @@
 
           </el-table-column>
 
-          <el-table-column label="藏品介绍" align="center" width="550">
+          <el-table-column label="藏品介绍" align="center" width="250">
             <template slot-scope="scope">
-              <span>{{ scope.row.fields.collectionintroduction }}</span>
+              <span>{{ scope.row.fields.collectionintroduction |ellipsis20}}</span>
             </template>
           </el-table-column>
           <el-table-column label="藏品年代" align="center">
@@ -49,7 +49,7 @@
 
           <el-table-column label="图片链接" align="center" width="200">
             <template slot-scope="scope">
-              <a href=""> {{ scope.row.fields.collectionimage }} </a>
+              <a href=""> {{ scope.row.fields.collectionimage|ellipsis20 }} </a>
             </template>
           </el-table-column>
 
@@ -65,7 +65,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column fixed="right" label="操作" align="center">
+          <el-table-column fixed="right" label="操作" align="center" width="200">
             <template slot-scope="scope">
               <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
               <el-button size="small" @click="handleDeleteList(scope.row)">删除</el-button>
@@ -103,7 +103,7 @@
         </el-form-item>
 
         <el-form-item label="图片链接" prop="collectionimage">
-          <el-input v-model="addForm.collectionimage" auto-complete="off" />
+          <el-input v-model="addForm.collectionimage" type="textarea" auto-complete="off" />
         </el-form-item>
 
         <el-form-item label="status" prop="status">
@@ -137,7 +137,7 @@
         </el-form-item>
 
         <el-form-item label="藏品介绍" prop="collectionintroduction">
-          <el-input v-model="selectForm.collectionintroduction" auto-complete="off" :disabled="true" />
+          <el-input v-model="selectForm.collectionintroduction" type="textarea" auto-complete="off" :disabled="true" />
         </el-form-item>
 
         <el-form-item label="藏品年代" prop="collection_age">
@@ -145,7 +145,7 @@
         </el-form-item>
 
         <el-form-item label="图片链接" prop="collectionimage">
-          <el-input v-model="selectForm.collectionimage" auto-complete="off" :disabled="true" />
+          <el-input v-model="selectForm.collectionimage" type="textarea" auto-complete="off" :disabled="true" />
         </el-form-item>
 
 
@@ -172,7 +172,7 @@
         </el-form-item>
 
         <el-form-item label="藏品介绍" prop="collectionintroduction">
-          <el-input v-model="editForm.collectionintroduction" auto-complete="off" />
+          <el-input v-model="editForm.collectionintroduction" type="textarea" auto-complete="off" />
         </el-form-item>
 
         <el-form-item label="藏品年代" prop="collection_age">
@@ -180,7 +180,7 @@
         </el-form-item>
 
         <el-form-item label="图片链接" prop="collectionimage">
-          <el-input v-model="editForm.collectionimage" auto-complete="off" />
+          <el-input v-model="editForm.collectionimage" type="textarea" auto-complete="off" />
         </el-form-item>
 
         
@@ -210,7 +210,24 @@ export default {
         0: 'delete'
       }
       return statusMap[status]
-    }
+    },
+
+    ellipsis10(value) {
+      if (!value) return "";
+      if (value.length > 10) {
+        return value.slice(0, 10) + "...";
+      }
+      return value;
+    },
+
+    ellipsis20(value) {
+      if (!value) return "";
+      if (value.length > 20) {
+        return value.slice(0, 20) + "...";
+      }
+      return value;
+    },
+
   },
   data() {
     return {
