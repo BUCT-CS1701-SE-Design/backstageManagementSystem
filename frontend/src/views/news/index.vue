@@ -198,6 +198,7 @@
   </section>
 </template>
 
+
 <script>
 import { getNewsList } from '@/api/table'
 
