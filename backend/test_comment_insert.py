@@ -75,12 +75,10 @@ def comment_add(request):
 
     Usercomments.objects.create(userid=uid, museumid=mid,comment=comment_add,sentianalysis_environment=sentenviroment_add, sentianalysis_exhibit=sentexhibit_add,sentianalysis_service=sentservice_add,status = status_add)
 
-    result = []
-    add_data = {}
+    result = False
 
-    #add_data['commentdate'] = commentdate_add,
-    add_data['comment'] = comment_add,
-    result.append(add_data)
+    if Usercomments.objects.filter(userid=uid, museumid=mid,comment=comment_add,sentianalysis_environment=sentenviroment_add, sentianalysis_exhibit=sentexhibit_add,sentianalysis_service=sentservice_add,status = status_add).exists():
+        result=True
     return HttpResponse(json.dumps(result))
 
 
