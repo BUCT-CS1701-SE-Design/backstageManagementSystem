@@ -63,17 +63,21 @@ def comment_get(request):
     return JsonResponse(result)
 
 def comment_add(request):
-    userid_add = 400
-    museumid_add = 400
-    museumname_add = 'xxx'
+    uid = Users.objects.get(userid = 6)
+    mid = Museum.objects.get(museumid = 300)
+
+    sentenviroment_add = 1
+    sentexhibit_add = 1
+    sentservice_add = 1
+    status_add = 1
     #commentdate_add = 000
     comment_add = 'xxx'
-    Usercomments.objects.create(userid=userid_add, museum=museumid_add,museumname=museumid_add,comment=comment_add)
+
+    Usercomments.objects.create(userid=uid, museumid=mid,comment=comment_add,sentianalysis_environment=sentenviroment_add, sentianalysis_exhibit=sentexhibit_add,sentianalysis_service=sentservice_add,status = status_add)
+
     result = []
     add_data = {}
-    add_data['userid'] = userid_add
-    add_data['museumid'] = museumid_add,
-    add_data['museumname'] = museumname_add,
+
     #add_data['commentdate'] = commentdate_add,
     add_data['comment'] = comment_add,
     result.append(add_data)
