@@ -5,10 +5,29 @@ import json
 from django.core import serializers
 from django.middleware.csrf import get_token
 from django.contrib.auth import authenticate, login, logout
+from django.conf.urls import url
 
 def museum_test(request,id):
     testdata = int(id)
     Museum_list = Museum.objects.filter(museumid = testdata)
+    result = {}
+    jsondata = serializers.serialize('json', Museum_list)
+    jsondatautf8 = json.loads(jsondata, encoding='utf-8')
+    result = {
+        "code": 200,
+        "data": {
+            "total": len(Museum_list),
+            "items": jsondatautf8}
+    }
+
+    return JsonResponse(result)
+
+def museum_testtest(request):
+
+    testdata = request.GET.get('id')
+    dd = int(testdata)
+    # dd=int(id)
+    Museum_list = Museum.objects.filter(museumid = dd)
     result = {}
     jsondata = serializers.serialize('json', Museum_list)
     jsondatautf8 = json.loads(jsondata, encoding='utf-8')

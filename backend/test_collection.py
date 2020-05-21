@@ -7,8 +7,8 @@ from django.middleware.csrf import get_token
 from django.contrib.auth import authenticate, login, logout
 
 
-def collection_test(request):
-    testdata = 12
+def collection_test(request,id):
+    testdata = int(id)
     Collection_list = Collection.objects.filter(museumid = testdata)
     result = {}
     jsondata = serializers.serialize('json', Collection_list)
@@ -20,6 +20,21 @@ def collection_test(request):
             "items": jsondatautf8}
     }
     return JsonResponse(result)
+
+def collection_Info(request,pk):
+    testdata = int(pk)
+    Collection_list = Collection.objects.filter(pk = testdata)
+    result = {}
+    jsondata = serializers.serialize('json', Collection_list)
+    jsondatautf8 = json.loads(jsondata, encoding='utf-8')
+    result = {
+        "code": 200,
+        "data": {
+            "total": len(Collection_list),
+            "items": jsondatautf8}
+    }
+    return JsonResponse(result)
+
 def collection_All(request):
     Collection_list = Collection.objects.all()
     result = {}
