@@ -192,7 +192,6 @@
   </section>
 </template>
 
-
 <script>
 import { getuserList } from '@/api/table'
 
