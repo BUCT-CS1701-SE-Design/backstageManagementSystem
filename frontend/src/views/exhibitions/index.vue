@@ -42,6 +42,7 @@
               {{ scope.row.fields.exhibitionTime }}
             </template>
           </el-table-column>
+
           <el-table-column label="所属博物馆" align="center">
             <template slot-scope="scope">
               {{ scope.row.fields.museumid | museumIDfilter }}
@@ -137,13 +138,14 @@
         <!--<el-button type="primary" @click="addSubmit" :loading="addLoading">提交</el-button>
        -->
 
+
       </div>
     </el-dialog>
     <!--新增界面结束-->
 
     <!--详细界面-->
-    <el-dialog title="详细信息" :visible.sync="selectFormVisible" :close-on-click-modal="false">
-      <el-form ref="selectForm" :inline="true" :model="selectForm" label-width="80px">
+    <el-dialog title="展览详细信息" :visible.sync="selectFormVisible" :close-on-click-modal="false">
+     <!-- <el-form ref="selectForm" :inline="true" :model="selectForm" label-width="80px">
 
         <el-form-item label="博物馆ID" prop="museumid">
           <el-input v-model="selectForm.museumid" auto-complete="off" :disabled="true" />
@@ -185,10 +187,33 @@
           <el-input v-model="selectForm.status" auto-complete="off" :disabled="true" />
         </el-form-item>
 
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="selectFormVisible = false">取消</el-button>
-      </div>
+      </el-form>-->
+     
+    
+  <el-card>
+      
+  <div   class="text item">
+     {{"博物馆ID: "+selectForm.museumid}}
+     <br><br>
+    {{"博物馆名称:  "}}  {{selectForm.museumid|museumIDfilter}}
+      <br><br>
+      {{"展览时间： "+selectForm.exhibitiontime}}
+       <br><br>
+       {{"展览主题： "+selectForm.exhibitiontheme}}
+        <br><br>
+        {{"展览介绍： "+selectForm.exhibitionintroduction}}
+        <br><br>
+        {{"展览位置: "+selectForm.exhibitionlocation}}
+         <br><br>
+         {{"展览电话: "+selectForm.exhibitiontel}}
+         <br><br>
+         {{"展览事件: "+selectForm.exhibitionthinglist}}
+         <br><br>
+         {{"图片链接: "+selectForm.exhibition_picture}}
+         <br><br>
+         {{"status: "+selectForm.status}}
+  </div>
+</el-card>
     </el-dialog> <!--详细界面结束-->
 
     <!--编辑界面-->
