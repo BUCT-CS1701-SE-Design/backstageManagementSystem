@@ -7,8 +7,22 @@ from django.middleware.csrf import get_token
 from django.contrib.auth import authenticate, login, logout
 
 def exhibithion_test(request,id):
-    testdata = 12
+    testdata = int(id)
     Exhibition_list = Exhibition.objects.filter(museumid = testdata)
+    result = {}
+    jsondata = serializers.serialize('json',Exhibition_list)
+    jsondatautf8 = json.loads(jsondata, encoding='utf-8')
+    result = {
+        "code": 200,
+        "data": {
+            "total": len(Exhibition_list),
+            "items": jsondatautf8}
+    }
+    return JsonResponse(result)
+
+def exhibithionInfo(request,pk):
+    testdata = int(pk)
+    Exhibition_list = Exhibition.objects.filter(pk = testdata)
     result = {}
     jsondata = serializers.serialize('json',Exhibition_list)
     jsondatautf8 = json.loads(jsondata, encoding='utf-8')

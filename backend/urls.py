@@ -39,18 +39,23 @@ urlpatterns = [
     path('museumdelete',api2.museum_delete),
     path('museumchange',api2.museum_change),
 
+    # path(r'^museumtesttest/$',api2.museum_testtest),
+
     path('exhibitiontest/<int:id>/',exhibition.exhibithion_test),
     path('exhibitionadd',exhibition.exhibition_add),
     path('exhibitionAll',exhibition.Exhibition_All),
     path('exhibajax',exhibition.Exhibition_pagin),
     path('exhibitiondelete',exhibition.exhibition_delete),
     path('exhibitionchange',exhibition.exhibition_change),
+    path('exhibitionInfo/<int:pk>/',exhibition.exhibithionInfo),
+    
 
-    path('collectiontest',api4.collection_test),
+    path('collectiontest/<int:id>/',api4.collection_test),
     path('collection_All',api4.collection_All),
     path('collectionadd',api4.collection_add),
     path('collectiondelete',api4.collection_delete),
     path('collectionchange',api4.collection_change),
+    path('collectionInfo/<int:pk>/',api4.collection_Info),
 
     path('explanationtest',api5.explanation_test),
     path('explanationadd',api5.explanation_add),
