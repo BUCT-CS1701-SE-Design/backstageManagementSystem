@@ -183,7 +183,6 @@
           <el-input v-model="editForm.newsmaintext" type="textarea" auto-complete="off" />
         </el-form-item>
 
-        
         <el-form-item label="status" prop="status">
           <el-input v-model="editForm.status" auto-complete="off" />
         </el-form-item>
