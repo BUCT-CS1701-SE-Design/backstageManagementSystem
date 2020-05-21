@@ -218,6 +218,7 @@
           <el-input v-model="editForm.exhibitiontel" auto-complete="off" />
         </el-form-item>
 
+
         <el-form-item label="展览事件" prop="exhibitionthinglist">
           <el-input v-model="editForm.exhibitionthinglist" auto-complete="off" />
         </el-form-item>
