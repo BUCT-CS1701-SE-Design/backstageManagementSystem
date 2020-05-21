@@ -22,7 +22,6 @@
       <!--新增按钮-->
       <div>
         <el-button type="success" icon="el-icon-circle-plus-outline" size="mini" round @click="handleAdd">新增</el-button>
-        <!--<el-button type="danger" icon="el-icon-delete" @click="handleDeleteList" size="mini" round>删除</el-button>-->
       </div>
 
       <!--页面表格显示信息--->
@@ -36,7 +35,7 @@
           </el-table-column>
 
           <el-table-column label="新闻标题" width="200" align="center">
-            <template slot-scope="scope">{{ scope.row.fields.newstitle }}
+            <template slot-scope="scope">{{ scope.row.fields.newstitle | ellipsis10 }}
               <el-button size="middle" mulitline="true" @click="handleSelect(scope.row)">详情</el-button>
             </template>
           </el-table-column>
@@ -54,9 +53,9 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="内容" align="center" width="600">
+          <el-table-column label="内容" align="center" width="300">
             <template slot-scope="scope">
-              <a href=""> {{ scope.row.fields.newsmaintext }} </a>
+              <a href=""> {{ scope.row.fields.newsmaintext | ellipsis20 }} </a>
             </template>
           </el-table-column>
 
@@ -78,7 +77,7 @@
     </div>  <!---div class="app-container"结束-->
 
     <!--新增界面-->
-    <el-dialog title="新增博物馆信息" :visible.sync="addFormVisible" :close-on-click-modal="false">
+    <el-dialog title="新增新闻信息" :visible.sync="addFormVisible" :close-on-click-modal="false">
       <el-form ref="addForm" :inline="true" :model="addForm" label-width="80px" :rules="addFormRules">
 
         <el-form-item label="博物馆ID" prop="museumid">
@@ -86,11 +85,11 @@
         </el-form-item>
 
         <el-form-item label="新闻标题" prop="newstitle">
-          <el-input v-model="addForm.newstitle" auto-complete="off" />
+          <el-input v-model="addForm.newstitle" type="textarea" auto-complete="off" />
         </el-form-item>
 
         <el-form-item label="新闻时间" prop="newstime">
-          <el-input v-model="addForm.newstime" auto-complete="off" />
+         <el-date-picker  v-model="addForm.newstime" type="date"  placeholder="选择日期" value-format="yyyy-MM-dd"></el-date-picker> 
         </el-form-item>
 
         <el-form-item label="新闻类别" prop="positive_negative">
@@ -104,14 +103,13 @@
         <el-form-item label="status" prop="status">
           <el-input v-model="addForm.status" auto-complete="off" />
         </el-form-item>
-
       </el-form>
 
       <!--提交或者取消-->
       <div slot="footer" class="dialog-footer">
         <el-button @click="addFormVisible = false">取消</el-button>
-        <!--<el-button type="primary" @click="addSubmit" :loading="addLoading">提交</el-button>
-        -->
+        <el-button type="primary" @click="addSubmit" :loading="addLoading">提交</el-button>
+        
       </div>
     </el-dialog>
     <!--新增界面结束-->
@@ -163,8 +161,7 @@
         </el-form-item>
 
         <el-form-item label="时间" prop="newstime">
-          <el-date-picker v-model="addForm.newstime" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" />
-          <!--el-input v-model="editForm.newstime" auto-complete="off" /-->
+           <el-date-picker  v-model="addForm.newstime" type="date"  placeholder="选择日期" value-format="yyyy-MM-dd"></el-date-picker> 
         </el-form-item>
 
         <el-form-item label="性质" prop="positive_negative">
@@ -201,7 +198,24 @@ export default {
         0: 'delete'
       }
       return statusMap[status]
+    },
+
+     ellipsis10(value) {
+      if (!value) return "";
+      if (value.length > 10) {
+        return value.slice(0, 10) + "...";
+      }
+      return value;
+    },
+
+    ellipsis20(value) {
+      if (!value) return "";
+      if (value.length > 20) {
+        return value.slice(0, 20) + "...";
+      }
+      return value;
     }
+
 
   },
   data() {
