@@ -14,54 +14,53 @@
         <el-table v-loading="listLoading" :data="list" element-loading-text="Loading" border fit highlight-current-row>
           
           <!--索引-->
-          <el-table-column type="index" :index="indexMethod" />
+          <el-table-column align="center" label="数据ID" type="index" :index="indexMethod" width="70" />
           
-          <el-table-column align="center" label="ID" width="55">
+          <!--<el-table-column align="center" label="ID" width="55">
             <template slot-scope="scope">
               {{ scope.$index }}
             </template>
-          </el-table-column>
-          <el-table-column align="center" label="藏品ID" width="75">
+          </el-table-column>-->
+
+          <el-table-column align="center" label="用户ID" width="150">
             <template slot-scope="scope">
-              {{ scope.row.pk }}
+              {{ scope.row.fields.idcard }}
             </template>
           </el-table-column>
 
-          <el-table-column label="藏品名称" width="220" align="center">
+          <el-table-column label="用户名" width="220" align="center">
             <template slot-scope="scope">
-
-              <el-button size="middle" @click="handleSelect(scope.row)">{{ scope.row.fields.collectionname }}</el-button>
-
-            </template>
-
-          </el-table-column>
-
-          <el-table-column label="藏品介绍" align="center" width="550">
-            <template slot-scope="scope">
-              <span>{{ scope.row.fields.collectionintroduction }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="藏品年代" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.fields.collection_age }}</span>
+              <el-button size="middle" @click="handleSelect(scope.row)">{{ scope.row.fields.username }}</el-button>
             </template>
           </el-table-column>
 
-          <el-table-column label="图片链接" align="center" width="200">
+          <el-table-column label="用户昵称" align="center" width="200">
             <template slot-scope="scope">
-              <a href=""> {{ scope.row.fields.collectionimage }} </a>
+              <span>{{ scope.row.fields.nickname }}</span>
             </template>
           </el-table-column>
 
-          <el-table-column class-name="status-col" label="Status" align="center">
+          <el-table-column label="密码" align="center">
             <template slot-scope="scope">
-              <el-tag :type="scope.row.fields.status | statusFilter">{{ scope.row.fields.status }}</el-tag>
+              <span>{{ scope.row.fields.password}}</span>
             </template>
           </el-table-column>
 
-          <el-table-column align="center" prop="created_at" label="所属博物馆ID">
+          <el-table-column label="联系方式" align="center" width="200">
             <template slot-scope="scope">
-              <span>{{ scope.row.fields.museumid }}</span>
+               {{ scope.row.fields.telephone }} 
+            </template>
+          </el-table-column>
+
+          <el-table-column class-name="status-col" label="用户创建时间" align="center">
+            <template slot-scope="scope">
+              <span>{{ scope.row.fields.usercreatedate }}</span>
+            </template>
+          </el-table-column>
+
+          <el-table-column align="center"  label="用户角色">
+            <template slot-scope="scope">
+              <span>{{ scope.row.fields.userrole }}</span>
             </template>
           </el-table-column>
 
@@ -77,45 +76,43 @@
     </div>  <!---div class="app-container"结束-->
 
     <!--新增界面-->
-    <el-dialog title="新增藏品信息" :visible.sync="addFormVisible" :close-on-click-modal="false">
+    <el-dialog title="新增用户" :visible.sync="addFormVisible" :close-on-click-modal="false">
       <el-form ref="addForm" :inline="true" :model="addForm" label-width="80px" :rules="addFormRules">
 
-        <el-form-item label="所属博物馆ID" prop="museumid">
-          <el-input v-model="addForm.museumID" auto-complete="off" />
+        <el-form-item label="用户ID" prop="idcard">
+          <el-input v-model="addForm.idcard" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="藏品ID" prop="collectionid">
-          <el-input v-model="addForm.CollectionID" auto-complete="off" />
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model="addForm.username" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="藏品名称" prop="collectionname">
-          <el-input v-model="addForm.collectionName" auto-complete="off" />
+        <el-form-item label="用户昵称" prop="nickname">
+          <el-input v-model="addForm.nickname" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="藏品介绍"  prop="collectionintroduction">
-          <el-input v-model="addForm.collectionintroduction" type="textarea" auto-complete="off" />
+        <el-form-item label="密码"  prop="password">
+          <el-input v-model="addForm.password"  auto-complete="off" />
         </el-form-item>
 
 
 
-        <el-form-item label="藏品年代" prop="collection_age">
-          <el-input v-model="addForm.collection_age" auto-complete="off" />
+        <el-form-item label="角色" prop="userrole">
+          <el-input v-model="addForm.userrole" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="图片链接" prop="collectionimage">
-          <el-input v-model="addForm.collectionimage" auto-complete="off" />
-        </el-form-item>
+        <!--<el-form-item label="创建时间" prop="usercreatedate">
+          
+          <el-input v-model="addForm.usercreatedate" auto-complete="off" :disabled="true"/>
+        </el-form-item>-->
 
-        <el-form-item label="status" prop="status">
-          <el-input v-model="addForm.status" auto-complete="off" />
-        </el-form-item>
       </el-form>
 
       <!--提交或者取消-->
       <div slot="footer" class="dialog-footer">
         <el-button @click="addFormVisible = false">取消</el-button>
-        <!--<el-button type="primary" @click="addSubmit" :loading="addLoading">提交</el-button>
-        -->
+        <el-button type="primary" @click="addSubmit" :loading="addLoading">提交</el-button>
+      
       </div>
     </el-dialog>
     <!--新增界面结束-->
@@ -124,34 +121,34 @@
     <el-dialog title="详细信息" :visible.sync="selectFormVisible" :close-on-click-modal="false">
       <el-form ref="selectForm" :inline="true" :model="selectForm" label-width="80px">
 
-        <el-form-item label="所属博物馆ID" prop="museumid" >
-          <el-input v-model="selectForm.museumid" auto-complete="off" :disabled="true" />
+        <el-form-item label="用户ID" prop="idcard" >
+          <el-input v-model="selectForm.idcard" auto-complete="off" :disabled="true" />
         </el-form-item>
 
-       <!-- <el-form-item label="藏品ID" prop="CollectionID">
-          <el-input v-model="selectForm.CollectionID" auto-complete="off" :disabled="true" />
-        </el-form-item> -->
+       
 
-        <el-form-item label="藏品名称" prop="collectionname">
-          <el-input v-model="selectForm.collectionname" auto-complete="off" :disabled="true" />
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model="selectForm.username" auto-complete="off" :disabled="true" />
         </el-form-item>
 
-        <el-form-item label="藏品介绍" prop="collectionintroduction">
-          <el-input v-model="selectForm.collectionintroduction" auto-complete="off" :disabled="true" />
+        <el-form-item label="用户昵称" prop="nickname">
+          <el-input v-model="selectForm.nickname" auto-complete="off" :disabled="true" />
         </el-form-item>
 
-        <el-form-item label="藏品年代" prop="collection_age">
-          <el-input v-model="selectForm.collection_age" auto-complete="off" :disabled="true" />
-        </el-form-item>
-
-        <el-form-item label="图片链接" prop="collectionimage">
-          <el-input v-model="selectForm.collectionimage" auto-complete="off" :disabled="true" />
+        <el-form-item label="密码"  prop="password">
+          <el-input v-model="selectForm.password"  auto-complete="off" :disabled="true" />
         </el-form-item>
 
 
-        <el-form-item label="status" prop="status">
-          <el-input v-model="selectForm.status" auto-complete="off" :disabled="true" />
-        </el-form-item> 
+
+        <el-form-item label="角色" prop="userrole">
+          <el-input v-model="selectForm.userrole" auto-complete="off" :disabled="true" />
+        </el-form-item>
+
+        <el-form-item label="创建时间" prop="usercreatedate">
+          
+          <el-input v-model="selectForm.usercreatedate" auto-complete="off" :disabled="true"  />
+        </el-form-item>
 
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -163,36 +160,32 @@
     <el-dialog title="编辑" :visible.sync="editFormVisible" :close-on-click-modal="false">
       <el-form ref="editForm" :inline="true" :model="editForm" label-width="80px" :rules="addFormRules">
 
-        <el-form-item label="博物馆ID" prop="museumid">
-          <el-input v-model="editForm.museumid" auto-complete="off" />
+        <el-form-item label="用户ID" prop="idcard">
+          <el-input v-model="editForm.idcard" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="藏品名称" prop="collectionname">
-          <el-input v-model="editForm.collectionname" auto-complete="off" />
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model="editForm.username" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="藏品介绍" prop="collectionintroduction">
-          <el-input v-model="editForm.collectionintroduction" auto-complete="off" />
+        <el-form-item label="用户昵称" prop="nickname">
+          <el-input v-model="editForm.nickname" auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="藏品年代" prop="collection_age">
-          <el-input v-model="editForm.collection_age" auto-complete="off" />
+        <el-form-item label="密码"  prop="password">
+          <el-input v-model="editForm.password"  auto-complete="off" />
         </el-form-item>
 
-        <el-form-item label="图片链接" prop="collectionimage">
-          <el-input v-model="editForm.collectionimage" auto-complete="off" />
-        </el-form-item>
 
-        
 
-        <el-form-item label="status" prop="status">
-          <el-input v-model="editForm.status" auto-complete="off" />
+        <el-form-item label="角色" prop="userrole">
+          <el-input v-model="editForm.userrole" auto-complete="off" />
         </el-form-item>
 
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="editFormVisible = false">取消</el-button>
-        <!--	<el-button type="primary" @click="editSubmit" :loading="editLoading">提交</el-button>-->
+        	<el-button type="primary" @click="editSubmit" :loading="editLoading">提交</el-button>
       </div>
     </el-dialog><!--编辑界面结束-->
 
@@ -223,31 +216,35 @@ export default {
       addLoading: false,
       // 输入框验证
       addFormRules: {
-        museumid: [{ required: true, message: '请输入博物馆ID', trigger: 'blur' }],
-        collectionid: [{ required: true, message: '请输入博物馆名称', trigger: 'blur' }],
-        status: [{ required: true, message: '请输入博物馆状态', trigger: 'blur' }]
+        idcard: [{ required: true, message: '请输入用户ID', trigger: 'blur' }],
+        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入用户密码', trigger: 'blur' }],
+        userrole: [{ required: true, message: '请输入用户角色', trigger: 'blur' }],
+        usercreatedate: [{ required: true, message: '请输入用户是否可以创建数据', trigger: 'blur' }]
       },
       // 新增界面数据
+      
+
       addForm: {
-         museumid: '',
-        collectionid: '',
-        collectionname: '',
-        collectionintroduction: '',
-        collection_age: '',
-        collectionimage: '',
-        status: '1'
+        idcard: '',
+        nickname: '',
+        password: '',
+        telephone: '',
+       // usercreatedate: "",
+        username: '',
+        userrole: ''
       },
 
       // 查看详细信息页面是否显示
       selectFormVisible: false,
       selectForm: {
-        museumid: '',
-        //CollectionID: '',
-        collectionname: '',
-        collectionintroduction: '',
-        collection_age: '',
-        collectionimage: '',
-        status: ''
+       idcard: '',
+        nickname: '',
+        password: '',
+        telephone: '',
+        usercreatedate: '',
+        username: '',
+        userrole: ''
       },
 
       // 编辑界面是否显示
@@ -256,18 +253,20 @@ export default {
       editLoading: false,
       // 编辑规则
       addFormRules: {
-        museumid: [{ required: true, message: '请输入博物馆ID', trigger: 'blur' }],
-        collectionid: [{ required: true, message: '请输入博物馆名称', trigger: 'blur' }],
-        status: [{ required: true, message: '请输入博物馆状态', trigger: 'blur' }]
+        idcard: [{ required: true, message: '请输入用户ID', trigger: 'blur' }],
+        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入用户密码', trigger: 'blur' }],
+        userrole: [{ required: true, message: '请输入用户角色', trigger: 'blur' }],
+        usercreatedate: [{ required: true, message: '请输入用户是否可以创建数据', trigger: 'blur' }]
       },
       editForm: {
-         museumid: '',
-        collectionid: '',
-        collectionname: '',
-        collectionintroduction: '',
-        collection_age: '',
-        collectionimage: '',
-        status: '1'
+          idcard: '',
+        nickname: '',
+        password: '',
+        telephone: '',
+      //  usercreatedate: '',
+        username: '',
+        userrole: ''
       }
     }// end return
   },
@@ -276,6 +275,8 @@ export default {
     this.fetchData()
   },
   methods: {
+
+   
 
     // table序号
     indexMethod(index) {
