@@ -190,7 +190,7 @@
       </el-form>-->
      
     
-  </div>
+  <el-card>
       
   <div   class="text item">
      {{"博物馆ID: "+selectForm.museumid}}
