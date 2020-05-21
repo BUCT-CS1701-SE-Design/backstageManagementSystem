@@ -25,7 +25,7 @@
           <el-table-column label=" 展览主题 " width="200" align="center">
             <template slot-scope="scope">
 
-              <el-button size="middle" @click="handleSelect(scope.$index,scope.row)">{{ scope.row.fields.exhibitiontheme }}</el-button>
+              <el-button size="middle" @click="handleSelect(scope.$index,scope.row)">{{ scope.row.fields.exhibitiontheme|ellipsis10 }}</el-button>
 
             </template>
 
@@ -33,7 +33,7 @@
 
           <el-table-column label="展览介绍" align="center" width="300">
             <template slot-scope="scope">
-              <span>{{ scope.row.fields.exhibitionintroduction }}</span>
+              <span>{{ scope.row.fields.exhibitionintroduction|ellipsis20 }}</span>
             </template>
           </el-table-column>
 
@@ -66,11 +66,13 @@
             </template>
           </el-table-column>
 
+
           <el-table-column align="center" label="展览图片">
             <template slot-scope="scope">
-              <span>{{ scope.row.fields.exhibition_picture }}</span>
+              <span>{{ scope.row.fields.exhibition_picture |ellipsis20}}</span>
             </template>
           </el-table-column>
+
 
           <el-table-column class-name="status-col" label="Status" width="80" align="center">
             <template slot-scope="scope">
@@ -78,7 +80,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column fixed="right" label="操作" align="center" width="100">
+          <el-table-column fixed="right" label="操作" align="center" width="200">
             <template slot-scope="scope">
               <el-button size="small" @click="handleEdit(scope.$index,scope.row)">编辑</el-button>
               <el-button size="small" @click="handleDeleteList(scope.$index,scope.row)">删除</el-button>
@@ -110,7 +112,7 @@
         </el-form-item>
 
         <el-form-item label="展览介绍" prop="exhibitionIntroduction">
-          <el-input v-model="addForm.exhibitionIntroduction" auto-complete="off" />
+          <el-input v-model="addForm.exhibitionIntroduction" type="textarea" auto-complete="off" />
         </el-form-item>
 
         <el-form-item label="展览位置" prop="exhibitionlocation">
@@ -122,7 +124,7 @@
         </el-form-item>
 
         <el-form-item label="展览图片" prop="exhibition_picture">
-          <el-input v-model="addForm.exhibition_picture" auto-complete="off" />
+          <el-input v-model="addForm.exhibition_picture" type="textarea" auto-complete="off" />
         </el-form-item>
 
         <el-form-item label="status" prop="status">
@@ -162,7 +164,7 @@
         </el-form-item>
 
         <el-form-item label="展览介绍" prop="exhibitionintroduction">
-          <el-input v-model="selectForm.exhibitionintroduction" auto-complete="off" :disabled="true" />
+          <el-input v-model="selectForm.exhibitionintroduction" type="textarea" auto-complete="off" :disabled="true" />
         </el-form-item>
 
         <el-form-item label="展览位置" prop="exhibitionlocation">
@@ -178,7 +180,7 @@
         </el-form-item>
 
         <el-form-item label="展览图片" prop="exhibition_picture">
-          <el-input v-model="selectForm.exhibition_picture" auto-complete="off" :disabled="true" />
+          <el-input v-model="selectForm.exhibition_picture" type="textarea" auto-complete="off" :disabled="true" />
         </el-form-item>
 
         <el-form-item label="status" prop="status">
@@ -258,6 +260,23 @@ export default {
       }
       return statusMap[status]
     },
+
+    ellipsis10(value) {
+      if (!value) return "";
+      if (value.length > 10) {
+        return value.slice(0, 10) + "...";
+      }
+      return value;
+    },
+
+    ellipsis20(value) {
+      if (!value) return "";
+      if (value.length > 20) {
+        return value.slice(0, 20) + "...";
+      }
+      return value;
+    },
+
     museumIDfilter(MID) {
       const IDMap = {
         1:	'故宫博物院',

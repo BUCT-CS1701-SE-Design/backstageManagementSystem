@@ -15,12 +15,6 @@
           
           <!--索引-->
           <el-table-column align="center" label="数据ID" type="index" :index="indexMethod" width="70" />
-          
-          <!--<el-table-column align="center" label="ID" width="55">
-            <template slot-scope="scope">
-              {{ scope.$index }}
-            </template>
-          </el-table-column>-->
 
           <el-table-column align="center" label="用户ID" width="150">
             <template slot-scope="scope">
@@ -34,7 +28,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="用户昵称" align="center" width="200">
+          <el-table-column label="用户昵称" align="center" width="150">
             <template slot-scope="scope">
               <span>{{ scope.row.fields.nickname }}</span>
             </template>
@@ -46,13 +40,13 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="联系方式" align="center" width="200">
+          <el-table-column label="联系方式" align="center" width="150">
             <template slot-scope="scope">
                {{ scope.row.fields.telephone }} 
             </template>
           </el-table-column>
 
-          <el-table-column class-name="status-col" label="用户创建时间" align="center">
+          <el-table-column class-name="status-col" label="用户创建时间" width="150" align="center">
             <template slot-scope="scope">
               <span>{{ scope.row.fields.usercreatedate }}</span>
             </template>
@@ -64,7 +58,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column fixed="right" label="操作" align="center">
+          <el-table-column fixed="right" label="操作" align="center"  width="200">
             <template slot-scope="scope">
               <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
               <el-button size="small" @click="handleDeleteList(scope.row)">删除</el-button>

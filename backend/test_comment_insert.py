@@ -63,24 +63,26 @@ def comment_get(request):
     return JsonResponse(result)
 
 def comment_add(request):
-    uid = Users.objects.get(userid = 6)
-    mid = Museum.objects.get(museumid = 300)
 
-    sentenviroment_add = 1
-    sentexhibit_add = 1
-    sentservice_add = 1
-    status_add = 1
-    #commentdate_add = 000
-    comment_add = 'xxx'
+    uid = Users.objects.get(userid = request.GET['userid'])
+    mid = Museum.objects.get(museumid = request.GET['museumid'])
 
-    Usercomments.objects.create(userid=uid, museumid=mid,comment=comment_add,sentianalysis_environment=sentenviroment_add, sentianalysis_exhibit=sentexhibit_add,sentianalysis_service=sentservice_add,status = status_add)
+    commentdate_add = request.GET['commentdate']
+    sentenviroment_add = request.GET['sentianalysis_environment']
+    sentexhibit_add = request.GET['sentianalysis_exhibit']
+    sentservice_add = request.GET['sentianalysis_service']
+    status_add = request.GET['status']
+    comment_add = request.GET['comment']
 
-    result = []
-    add_data = {}
+    Usercomments.objects.create(userid=uid, museumid=mid, commentdate=commentdate_add, comment=comment_add,
+                                sentianalysis_environment=sentenviroment_add, sentianalysis_exhibit=sentexhibit_add,
+                                sentianalysis_service=sentservice_add, status=status_add)
+    result = False
 
-    #add_data['commentdate'] = commentdate_add,
-    add_data['comment'] = comment_add,
-    result.append(add_data)
+    if Usercomments.objects.filter(userid=uid, museumid=mid, commentdate=commentdate_add, comment=comment_add,
+                                   sentianalysis_environment=sentenviroment_add, sentianalysis_exhibit=sentexhibit_add,
+                                   sentianalysis_service=sentservice_add, status=status_add).exists():
+        result = True
     return HttpResponse(json.dumps(result))
 
 

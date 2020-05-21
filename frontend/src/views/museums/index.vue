@@ -53,7 +53,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column fixed="right" label="操作" align="center">
+          <el-table-column fixed="right" label="操作" align="center" width="200">
             <template slot-scope="scope">
               <el-button size="small" icon="el-icon-edit" @click="handleEdit(scope.row)">编辑</el-button>
               <el-button size="small" @click="handleDeleteList(scope.row)">删除</el-button>
@@ -80,19 +80,19 @@
         </el-form-item>
 
         <el-form-item label="简介" prop="introduction">
-          <el-input v-model="addForm.introduction" auto-complete="off" />
+          <el-input v-model="addForm.introduction" type="textarea" auto-complete="off" />
         </el-form-item>
 
         <el-form-item label="开放时间" prop="opentime">
-          <el-input v-model="addForm.opentime" auto-complete="off" />
+          <el-input v-model="addForm.opentime" type="textarea" auto-complete="off" />
         </el-form-item>
 
         <el-form-item label="网址" prop="link">
-          <el-input v-model="addForm.link" auto-complete="off" />
+          <el-input v-model="addForm.link" type="textarea" auto-complete="off" />
         </el-form-item>
 
         <el-form-item label="位置" prop="location">
-          <el-input v-model="addForm.location" auto-complete="off" />
+          <el-input v-model="addForm.location" type="textarea" auto-complete="off" />
         </el-form-item>
 
         <el-form-item label="label" prop="label">
@@ -163,19 +163,19 @@
         </el-form-item>
 
         <el-form-item label="简介" prop="introduction">
-          <el-input v-model="selectForm.introduction" auto-complete="off" :disabled="true" />
+          <el-input v-model="selectForm.introduction" type="textarea" auto-complete="off" :disabled="true" />
         </el-form-item>
 
         <el-form-item label="开放时间" prop="opentime">
-          <el-input v-model="selectForm.opentime" auto-complete="off" :disabled="true" />
+          <el-input v-model="selectForm.opentime" type="textarea" auto-complete="off" :disabled="true" />
         </el-form-item>
 
         <el-form-item label="网址" prop="link">
-          <el-input v-model="selectForm.link" auto-complete="off" :disabled="true" />
+          <el-input v-model="selectForm.link" type="textarea" auto-complete="off" :disabled="true" />
         </el-form-item>
 
         <el-form-item label="位置" prop="location">
-          <el-input v-model="selectForm.location" auto-complete="off" :disabled="true" />
+          <el-input v-model="selectForm.location" type="textarea" auto-complete="off" :disabled="true" />
         </el-form-item>
 
         <el-form-item label="label" prop="label">
@@ -237,19 +237,19 @@
         </el-form-item>
 
         <el-form-item label="简介" prop="introduction">
-          <el-input v-model="editForm.introduction" auto-complete="off" />
+          <el-input v-model="editForm.introduction" type="textarea" auto-complete="off" />
         </el-form-item>
 
         <el-form-item label="开放时间" prop="opentime">
-          <el-input v-model="editForm.opentime" auto-complete="off" />
+          <el-input v-model="editForm.opentime" type="textarea" auto-complete="off" />
         </el-form-item>
 
         <el-form-item label="网址" prop="link">
-          <el-input v-model="editForm.link" auto-complete="off" />
+          <el-input v-model="editForm.link" type="textarea" auto-complete="off" />
         </el-form-item>
 
         <el-form-item label="位置" prop="location">
-          <el-input v-model="editForm.location" auto-complete="off" />
+          <el-input v-model="editForm.location" type="textarea" auto-complete="off" />
         </el-form-item>
 
         <el-form-item label="label" prop="label">
