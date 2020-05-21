@@ -319,7 +319,7 @@ export default {
 
     fetchData() {
       this.listLoading = true
-      getexplainationsList.then(response => {
+      getexplainationsList().then(response => {
         this.list = response.data.items
         console.log(response.data.items.fields)
         this.listLoading = false
