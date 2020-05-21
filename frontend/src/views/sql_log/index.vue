@@ -1,9 +1,8 @@
 <template>
-  
+
   <div class="app-container">
-      <div> 
-      <p>数据库操作日志 </p>
-      </div>
+
+    <a href="https://dms-rds.aliyun.com"><el-button type="primary" round>去阿里云数据库查看更多信息！</el-button></a>
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -74,7 +73,7 @@ export default {
     fetchData() {
       this.listLoading = true
       getList().then(response => {
-        this.list = response.data.items
+        //    this.list = response.data.items
         this.listLoading = false
       })
     }
