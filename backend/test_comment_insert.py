@@ -49,7 +49,7 @@ def comment_All(request):
     return JsonResponse(result)
 
 def comment_get(request):
-    testdata=12
+    testdata=request.GET['museumid']
     Usercomments_list = Usercomments.objects.filter(museumid = testdata)
     jsondata = serializers.serialize('json', Usercomments_list)
     result = {}
