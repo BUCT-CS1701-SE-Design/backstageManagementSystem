@@ -43,3 +43,11 @@ export function getexplainationsList(params) {
     params
   })
 }
+
+export function getuserList(params) {
+  return request({
+    url: 'userstest',
+    method: 'get',
+    params
+  })
+}
