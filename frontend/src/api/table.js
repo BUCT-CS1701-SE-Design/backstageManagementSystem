@@ -16,7 +16,7 @@ export function getExhibitionList(params) {
 }
 export function getNewsList(params) {
   return request({
-    url: 'test',
+    url: 'news',
     method: 'get',
     params
   })
