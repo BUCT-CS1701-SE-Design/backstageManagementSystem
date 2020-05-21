@@ -3,6 +3,23 @@
 
     <div class="app-container">
 
+        <!-- 搜索区begin -->
+       <div class="handle-box">
+       <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
+            <el-form :inline="true" :model="ff">
+                <!----> <el-form-item>
+                  博物馆ID： <el-input v-model="ff.museumid"  placeholder="博物馆ID" style="width:200px; heght:30px;" size="mini"></el-input>
+                </el-form-item>
+                 
+                
+                <el-form-item>
+                   <el-button type="primary" icon="el-icon-search" @click="getResult()" size="mini">搜索</el-button>
+                </el-form-item>  
+
+            </el-form>
+        </el-col>
+         </div>   <!--搜索区end -->
+
       <!--新增按钮-->
       <div>
         <el-button type="success" icon="el-icon-circle-plus-outline" size="mini" round @click="handleAdd">新增</el-button>
@@ -15,7 +32,7 @@
 
           <el-table-column align="center" label="博物馆ID" width="105">
             <template slot-scope="scope">
-              {{ scope.row.museumid }}
+              {{ scope.row.fields.museumid }}
             </template>
           </el-table-column>
 
@@ -186,6 +203,7 @@ import { getNewsList } from '@/api/table'
 
 export default {
   filters: {
+    
     statusFilter(status) {
       const statusMap = {
         1: 'success',
@@ -193,11 +211,21 @@ export default {
       }
       return statusMap[status]
     }
+
   },
   data() {
     return {
       list: null,
       listLoading: true,
+
+      ff:{
+       museumid: '',
+        newsmaintext: '',
+        newstime: '',
+        newstitle: '',
+        positive_negative: '',
+        status: ''
+      },
 
       // 新增界面是否显示
       addFormVisible: false,
@@ -256,6 +284,25 @@ export default {
     this.fetchData()
   },
   methods: {
+
+    getResult: function() {
+      var _this = this;
+      this.listLoading = true;
+      let param = Object.assign(
+        {},
+        {
+          museumid: this.ff.museumid,
+        }
+      );
+      this.$ajax({
+        method: "get",
+        url: "news",
+        data: param
+      }).then(function(response) {
+        _this.ff = response.data.items.fields;
+        _this.listLoading = false;
+      });
+    },
 
     fetchData() {
       this.listLoading = true
@@ -379,27 +426,6 @@ export default {
           })
         }
         )
-      /*
-        .then(() => {
-          this.listLoading = true;
-          let param = new URLSearchParams();
-          param.append("ids", id);
-          console.log("ids:" + param);
-          this.$ajax({
-            method: "post",
-            url: "/api/sysuser-api/delSysUserByUserId",
-            data: param
-          }).then(res => {
-            this.listLoading = false;
-            this.$message({
-              message: "删除成功",
-              type: "success"
-            });
-            this.selectList = [];
-            this.getResult(1);
-          });
-        })
-        .catch(() => {});*/
     }
 
   }
