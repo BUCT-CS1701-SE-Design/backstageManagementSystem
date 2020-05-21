@@ -3,22 +3,21 @@
 
     <div class="app-container">
 
-        <!-- 搜索区begin -->
-       <div class="handle-box">
-       <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
-            <el-form :inline="true" :model="ff">
-                <!----> <el-form-item>
-                  博物馆ID： <el-input v-model="ff.museumid"  placeholder="博物馆ID" style="width:200px; heght:30px;" size="mini"></el-input>
-                </el-form-item>
-                 
-                
-                <el-form-item>
-                   <el-button type="primary" icon="el-icon-search" @click="getResult()" size="mini">搜索</el-button>
-                </el-form-item>  
+      <!-- 搜索区begin -->
+      <div class="handle-box">
+        <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
+          <el-form :inline="true" :model="ff">
+            <!----> <el-form-item>
+                      博物馆ID： <el-input v-model="ff.museumid" placeholder="博物馆ID" style="width:200px; heght:30px;" size="mini" />
+                    </el-form-item>
 
-            </el-form>
+            <el-form-item>
+              <el-button type="primary" icon="el-icon-search" size="mini" @click="getResult()">搜索</el-button>
+            </el-form-item>
+
+          </el-form>
         </el-col>
-         </div>   <!--搜索区end -->
+      </div>   <!--搜索区end -->
 
       <!--新增按钮-->
       <div>
@@ -36,9 +35,9 @@
             </template>
           </el-table-column>
 
-          <el-table-column label="新闻标题" width="100" align="center">
-            <template slot-scope="scope">
-              <el-button size="middle" @click="handleSelect(scope.row)">{{ scope.row.fields.newstitle }}</el-button>
+          <el-table-column label="新闻标题" width="200" align="center">
+            <template slot-scope="scope">{{ scope.row.fields.newstitle }}
+              <el-button size="middle" mulitline="true" @click="handleSelect(scope.row)">详情</el-button>
             </template>
           </el-table-column>
 
@@ -49,7 +48,7 @@
             </template>
           </el-table-column>
 
-<el-table-column align="center"  label="新闻类别" width="100">
+          <el-table-column align="center" label="新闻类别" width="100">
             <template slot-scope="scope">
               <span>{{ scope.row.fields.positive_negative }}</span>
             </template>
@@ -61,15 +60,11 @@
             </template>
           </el-table-column>
 
-          
-
           <el-table-column class-name="status-col" label="Status" width="80" align="center">
             <template slot-scope="scope">
               <el-tag :type="scope.row.fields.status | statusFilter">{{ scope.row.fields.status }}</el-tag>
             </template>
           </el-table-column>
-
-          
 
           <el-table-column fixed="right" label="操作" align="center">
             <template slot-scope="scope">
@@ -98,17 +93,14 @@
           <el-input v-model="addForm.newstime" auto-complete="off" />
         </el-form-item>
 
-       
-
         <el-form-item label="新闻类别" prop="positive_negative">
           <el-input v-model="addForm.positive_negative" auto-complete="off" />
         </el-form-item>
 
-     <el-form-item label="新闻内容" prop="newsmaintext">
+        <el-form-item label="新闻内容" prop="newsmaintext">
           <el-input v-model="addForm.newsmaintext" type="textarea" auto-complete="off" />
         </el-form-item>
 
-       
         <el-form-item label="status" prop="status">
           <el-input v-model="addForm.status" auto-complete="off" />
         </el-form-item>
@@ -171,7 +163,7 @@
         </el-form-item>
 
         <el-form-item label="时间" prop="newstime">
-           <el-date-picker  v-model="addForm.newstime" type="date"  placeholder="选择日期" value-format="yyyy-MM-dd"></el-date-picker> 
+          <el-date-picker v-model="addForm.newstime" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" />
           <!--el-input v-model="editForm.newstime" auto-complete="off" /-->
         </el-form-item>
 
@@ -197,13 +189,12 @@
   </section>
 </template>
 
-
 <script>
 import { getNewsList } from '@/api/table'
 
 export default {
   filters: {
-    
+
     statusFilter(status) {
       const statusMap = {
         1: 'success',
@@ -218,8 +209,8 @@ export default {
       list: null,
       listLoading: true,
 
-      ff:{
-       museumid: '',
+      ff: {
+        museumid: '',
         newsmaintext: '',
         newstime: '',
         newstitle: '',
@@ -250,12 +241,12 @@ export default {
       // 查看详细信息页面是否显示
       selectFormVisible: false,
       selectForm: {
-         museumid: '',
+        museumid: '',
         newsmaintext: '',
         newstime: '',
         newstitle: '',
         positive_negative: '',
-        
+
         status: ''
       },
 
@@ -270,7 +261,7 @@ export default {
         status: [{ required: true, message: '请输入博物馆状态', trigger: 'blur' }]
       },
       editForm: {
-         museumid: '',
+        museumid: '',
         newsmaintext: '',
         newstime: '',
         newstitle: '',
@@ -286,22 +277,22 @@ export default {
   methods: {
 
     getResult: function() {
-      var _this = this;
-      this.listLoading = true;
-      let param = Object.assign(
+      var _this = this
+      this.listLoading = true
+      const param = Object.assign(
         {},
         {
-          museumid: this.ff.museumid,
+          museumid: this.ff.museumid
         }
-      );
+      )
       this.$ajax({
-        method: "get",
-        url: "news",
+        method: 'get',
+        url: 'news',
         data: param
       }).then(function(response) {
-        _this.ff = response.data.items.fields;
-        _this.listLoading = false;
-      });
+        _this.ff = response.data.items.fields
+        _this.listLoading = false
+      })
     },
 
     fetchData() {
