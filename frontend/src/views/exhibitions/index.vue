@@ -31,7 +31,7 @@
 
           </el-table-column>
 
-          <el-table-column label="展览介绍" align="center" width="300">
+          <el-table-column label="展览介绍" align="center" width="250">
             <template slot-scope="scope">
               <span>{{ scope.row.fields.exhibitionintroduction|ellipsis20 }}</span>
             </template>
@@ -67,21 +67,19 @@
             </template>
           </el-table-column>
 
-
           <el-table-column align="center" label="展览图片">
             <template slot-scope="scope">
-              <span>{{ scope.row.fields.exhibition_picture |ellipsis20}}</span>
+              <span>{{ scope.row.fields.exhibition_picture |ellipsis20 }}</span>
             </template>
           </el-table-column>
 
-
-          <el-table-column class-name="status-col" label="Status" width="80" align="center">
+          <el-table-column class-name="status-col" label="Status" align="center">
             <template slot-scope="scope">
               <el-tag :type="scope.row.fields.status | statusFilter">{{ scope.row.fields.status }}</el-tag>
             </template>
           </el-table-column>
 
-          <el-table-column fixed="right" label="操作" align="center" width="200">
+          <el-table-column fixed="right" label="操作" align="center">
             <template slot-scope="scope">
               <el-button size="small" @click="handleEdit(scope.$index,scope.row)">编辑</el-button>
               <el-button size="small" @click="handleDeleteList(scope.$index,scope.row)">删除</el-button>
@@ -249,7 +247,6 @@
           <el-input v-model="editForm.exhibitiontel" auto-complete="off" />
         </el-form-item>
 
-
         <el-form-item label="展览事件" prop="exhibitionthinglist">
           <el-input v-model="editForm.exhibitionthinglist" auto-complete="off" />
         </el-form-item>
@@ -286,19 +283,19 @@ export default {
     },
 
     ellipsis10(value) {
-      if (!value) return "";
+      if (!value) return ''
       if (value.length > 10) {
-        return value.slice(0, 10) + "...";
+        return value.slice(0, 10) + '...'
       }
-      return value;
+      return value
     },
 
     ellipsis20(value) {
-      if (!value) return "";
+      if (!value) return ''
       if (value.length > 20) {
-        return value.slice(0, 20) + "...";
+        return value.slice(0, 20) + '...'
       }
-      return value;
+      return value
     },
 
     museumIDfilter(MID) {
