@@ -99,7 +99,7 @@ def TestEx(request):
     return  JsonResponse(result)
 
 def News(request):
-    News_list = Museumnews.objects.all()[:100]
+    News_list = Museumnews.objects.all()
     jsondata = serializers.serialize('json',News_list)
     jsondatautf8 = json.loads(jsondata, encoding='utf-8')
     result = {
@@ -111,19 +111,80 @@ def News(request):
     return  JsonResponse(result)
 
 def Citymuseum(request):
-    city = '北京'
-    Museum_list = Museum.objects.filter(location__icontains=city)
-    result = []
-    i = 1
+    city=request.GET.get('city')
+    Museum_list=Museum.objects.filter(location__icontains=city)
+    result =[]
+    i=1
     for var in Museum_list:
-        data = {}
-        data['museumname'] = var.museumname
-        data['museumid'] = var.museumid
-        data['location'] = var.location
-
+        data={}
+        data['museumname']=var.museumname
+        data['museumid']=var.museumid
+        data['location']=var.location
+        
         result.append(data)
-        i += 1
-    return HttpResponse(result)
+        i+=1
+    fin=[]
+    fin.append(result)
+    jsondata = serializers.serialize('json',Museum_list)
+    return HttpResponse(json.dumps(result))
+
+def Collectionrank(request):
+    rank_list=Museum.objects.order_by('collection_number')
+    result=[]
+    i=1
+    for var in rank_list:
+        if i<6:
+            data={}
+            data['rank']=i
+            data['museumid']=var.museumid
+            data['museumname']=var.museumname
+            data['colllectionnum']=var.collection_number
+            result.append(data)
+        i+=1
+        
+    fin=[]
+    fin.append(result)
+    jsondata = serializers.serialize('json',rank_list)
+    return HttpResponse(json.dumps(result))
+    
+def Newsrank(request):
+    rank_list=Museum.objects.annotate(num=Count('museumnews__newsid')).order_by('-num')
+    result=[]
+    i=1
+    for var in rank_list:
+        if i<6:
+            data={}
+            data['rank']=i
+            data['museumid']=var.museumid
+            data['num']=var.num
+            data['name']=var.museumname
+            result.append(data)
+        i+=1
+       
+    fin=[]
+    fin.append(result)
+    jsondata = serializers.serialize('json',rank_list)
+    return HttpResponse(json.dumps(result))
+
+def Exhibitionrank(request):
+    rank_list=Museum.objects.annotate(num=Count('exhibition__exhibitionid')).order_by('-num')
+    result=[]
+    i=1
+    for var in rank_list:
+        if i<6:
+            data={}
+            data['rank']=i
+            data['museumid']=var.museumid
+            data['num']=var.num
+            data['name']=var.museumname
+            result.append(data)
+        i+=1
+        
+    fin=[]
+    fin.append(result)
+    jsondata = serializers.serialize('json',rank_list)
+    return HttpResponse(json.dumps(result))
+
 
 
 def Add(request):
