@@ -6,8 +6,8 @@ from django.core import serializers
 from django.middleware.csrf import get_token
 from django.contrib.auth import authenticate, login, logout
 
-def users_test(request,id):
-    testdata = int(id)
+def users_test(request):
+    testdata = 12
     Users_list = Users.objects.filter(userid =testdata)
     result = {}
     jsondata = serializers.serialize('json', Users_list)

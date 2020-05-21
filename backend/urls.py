@@ -62,7 +62,7 @@ urlpatterns = [
     path('explanationdelete',api5.explanation_delete),
     path('explanationchange',api5.explanation_change),
 
-    path('userstest/<int:id>/',user.users_test),
+    path('userstest',user.users_test),
     path('usersadd',user.users_add),
     path('usersdelete',user.users_delete),
     path('userschange',user.users_change),

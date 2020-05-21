@@ -38,7 +38,7 @@ export function getCommentList(params) {
 
 export function getexplainationsList(params) {
   return request({
-    url: '/explanationtest',
+    url: 'explanationtest',
     method: 'get',
     params
   })
